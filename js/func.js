@@ -49,3 +49,23 @@ kontrol_fonksiyonu(id) {
 }
 
 */
+
+var userlang = "tr";
+
+var request = new XMLHttpRequest();
+request.open("GET","js/lang/"+userlang+".json");
+request.responseType = 'json';
+request.send();
+
+request.onload = function() {
+   var soru = request.response;
+   sorubas(soru);
+ }
+
+function sorubas(jsonObj){
+   var count = Object.keys(jsonObj.questions).length;
+   console.log("Toplam soru: " + count);
+   for (i = 0; i < count; i++) {
+      console.log(jsonObj.questions[i]);
+   }
+}

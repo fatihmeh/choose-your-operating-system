@@ -1,0 +1,8 @@
+{
+    "questions":[
+        {"id":"0","q":"Hazır mısın?","a1":"Hazırım","a2":"Değilim"},
+        {"id":"1","q":"Paran var mı?","a1":"Çok var","a2":"Biraz var","a3":"O da ne?"},
+        {"id":"2","q":"Evin var mı?","a1":"Boğazda yalım var","a2":"Kiracıyım","a3":"Gülhane parkında dostlarım var"},
+        {"id":"3","q":"Araban var mı?","a1":"Var","a2":"Yok","a3":"İstanbul Kart"}
+    ]
+}
