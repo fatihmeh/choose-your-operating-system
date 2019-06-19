@@ -1,8 +1,13 @@
 {
+    "interface":[],
     "questions":[
-        {"id":"0","q":"Hazır mısın?","a1":"Hazırım","a2":"Değilim"},
-        {"id":"1","q":"Paran var mı?","a1":"Çok var","a2":"Biraz var","a3":"O da ne?"},
-        {"id":"2","q":"Evin var mı?","a1":"Boğazda yalım var","a2":"Kiracıyım","a3":"Gülhane parkında dostlarım var"},
-        {"id":"3","q":"Araban var mı?","a1":"Var","a2":"Yok","a3":"İstanbul Kart"}
+        {"id":"0","q":"Ücretsiz bir sistem mi istersin?","a1":[{"t":"Evet","to":"1"}],"a2":[{"t":"Hayır","to":"3"}]},
+        {"id":"1","q":"Sık sık güncelleme ister misin?","a1":[{"t":"Nevet","to":"2"}],"a2":[{"t":"Nayır","to":"","r":"1"}]},
+        {"id":"2","q":"Sorun yaşarsan biraz uğraşmak seni sıkar mı?","a1":[{"t":"Nevet","to":"","r":"0"}],"a2":[{"t":"Nayır","to":"","r":"2"}]},
+        {"id":"3","q":"Gizliliğine çok önem verir misin?","a1":[{"t":"Nevet","to":"4"}],"a2":[{"t":"Nayır","to":"","r":"3"}]},
+        {"id":"4","q":"Oyun odaklı bir sistemi tercih eder misin?","a1":[{"t":"Nevet","to":"","r":"3"}],"a2":[{"t":"Nayır","to":"","r":"5"}]}
+    ],
+    "results":[
+        {"id":"0","s":"Solus, Manjaro"},{"id":"1","s":"Mint, Fedora"},{"id":"2","s":"Arch, Gentoo"},{"id":"3","s":"Windows 10"},{"id":"4","s":"Windows 7"},{"id":"5","s":"macOs"}
     ]
 }
