@@ -68,8 +68,67 @@ request.onload = function() {
 
 function createQuestions(jsonObj){
 
+   // Kullanımı kolaylaştırmak için gerekli değişken tanımlamaları
+
+   /*
+   ###### question()
+   ###### Soruları veya questionLength değişkeni aracılığıyla soru sayısını döndürür
+   ######
+   ###### param0: soru[]
+   ######
+   */
+   let question = function() { 
+         // Parametre tanımlanmışsa ona ait soruyu döndür
+         if (arguments[0] !== undefined ) {
+               return jsonObj.questions[arguments[0]]
+         }
+         // Parametre tanımlanmamışsa tüm soruları döndür
+         else{
+               return jsonObj.questions;
+         }
+      };
+      
+   let questionLength = Object.keys(question()).length;
+   
+   /* 
+   ###### answer()
+   ###### Cevapları döndürür
+   ######
+   ###### param0: soru[]
+   ###### param1: cevap[]
+   ######
+   */
+   let answer = function() {
+         // Parametre 1 tanımlanmışsa ona ait cevabı döndür
+         if (arguments[1] !== undefined ) {
+            return arguments[0].a[arguments[1]]
+         }
+         // Parametre 1 tanımlanmamışsa tüm cevapları döndür
+         else{
+            return arguments[0].a
+         }
+      };
+   
+      /* 
+   ###### answerLength()
+   ###### Cevap sayısını döndürür
+   ######
+   ###### param0: soru[]
+   ###### param1: cevap[]
+   ######
+   */
+   let answerLength = function() { return Object.keys(answer(question(arguments[0]))).length }
+   
    // Soruların adetini hesaplayıp döngüyü adet kadar çalıştırıyoruz
-   for (i = 0; i < Object.keys(jsonObj.questions).length; i++) {
+   for (let questionCount = 0; questionCount < questionLength; questionCount++) {
+      console.log("Soru: " + question(questionCount).id );
+      console.log(question(questionCount).q);
+      console.log(answerLength(questionCount) + " tane seçenek bulundu");
+
+      for (let answerCount = 0; answerCount < answerLength(questionCount) ; answerCount++) {
+         var newJSONstrc = jsonObj.questions[questionCount].a[answerCount].t;
+         console.log("Cevap: " + answerCount + " " + newJSONstrc);
+      }
 
       // Bu fonksiyon ile seçilen cevap başka soruya mı, yoksa direkt bir sonuca mı götürüyor onu kontrol ediyoruz ve ona uygun gösterimleri sağlıyoruz
       var where;
@@ -79,10 +138,11 @@ function createQuestions(jsonObj){
       }
       
       // HTML içinde gerekli elementleri oluşturup JSON'dan gelen verileri uygun kısımlara yerleştiriyoruz
+      /*
       var elemType = document.createElement("p");
       elemType.innerHTML = "<b>Soru ID: " + jsonObj.questions[i].id + "</b> " + jsonObj.questions[i].q + "<br><b>Cevaplar: </b>" + jsonObj.questions[i].a1[0].t + tocheck(jsonObj.questions[i].a1[0]) +  " / " + jsonObj.questions[i].a2[0].t + tocheck(jsonObj.questions[i].a2[0]);
       document.querySelector("main").appendChild(elemType);
+      */
    }
-   
    
 }

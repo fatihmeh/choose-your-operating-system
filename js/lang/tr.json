@@ -4,30 +4,47 @@
         {
             "id":"0",
             "q":"Ücretsiz bir sistem mi istersin?",
-            "a1":[{"t":"Evet","to":"1"}],
-            "a2":[{"t":"Hayır","to":"3"}]
+            "a":[
+                    {"t":"Evet","to":"1"},
+                    {"t":"Hayır","to":"3","r":"1"},
+                    {"t":"TEST3 Ekstra Seçenek","to":"0"},
+                    {"t":"TEST4 Ekstra Seçenek","to":"0"},
+                    {"t":"TEST5 Ekstra Seçenek","to":"0"},
+                    {"t":"TEST6 Ekstra Seçenek","to":"0"},
+                    {"t":"TEST7 Ekstra Seçenek","to":"0"}
+                ]
         },
         {
-            "id":"1","q":"Sık sık güncelleme ister misin?",
-            "a1":[{"t":"Nevet","to":"2"}],
-            "a2":[{"t":"Nayır","to":"","r":"1"}]
+            "id":"1",
+            "q":"Sık sık güncelleme ister misin?",
+            "a":[
+                    {"t":"Nevet","to":"2"},
+                    {"t":"Nayır","to":"","r":"1"}
+                ]
         },
         {
             "id":"2",
             "q":"Sorun yaşarsan biraz uğraşmak seni sıkar mı?",
-            "a1":[{"t":"Nevet","to":"","r":"0"}],
-            "a2":[{"t":"Nayır","to":"","r":"2"}]
+            "a":[
+                    {"t":"Nevet","to":"","r":"0"},
+                    {"t":"Nayır","to":"","r":"2"}
+                ]
         },
         {
-            "id":"3","q":"Gizliliğine çok önem verir misin?",
-            "a1":[{"t":"Nevet","to":"4"}],
-            "a2":[{"t":"Nayır","to":"","r":"3"}]
+            "id":"3",
+            "q":"Gizliliğine çok önem verir misin?",
+            "a":[
+                    {"t":"Nevet","to":"4"},
+                    {"t":"Nayır","to":"","r":"3"}
+                ]
         },
         {
             "id":"4",
             "q":"Oyun odaklı bir sistemi tercih eder misin?",
-            "a1":[{"t":"Nevet","to":"","r":"4"}],
-            "a2":[{"t":"Nayır","to":"","r":"5"}]
+            "a":[
+                    {"t":"Nevet","to":"","r":"4"},
+                    {"t":"Nayır","to":"","r":"5"}
+                ]
         }
     ],
     "results":[
