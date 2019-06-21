@@ -6,12 +6,12 @@
             "q":"Ücretsiz bir sistem mi istersin?",
             "a":[
                     {"t":"Evet","to":"1"},
-                    {"t":"Hayır","to":"3","r":"1"},
-                    {"t":"TEST3 Ekstra Seçenek","to":"0"},
-                    {"t":"TEST4 Ekstra Seçenek","to":"0"},
-                    {"t":"TEST5 Ekstra Seçenek","to":"0"},
-                    {"t":"TEST6 Ekstra Seçenek","to":"0"},
-                    {"t":"TEST7 Ekstra Seçenek","to":"0"}
+                    {"t":"Hayır","to":"3"},
+                    {"t":"Ekstra Seçenek","to":"1071"},
+                    {"t":"Ultra Seçenek","to":"1453"},
+                    {"t":"Mega Seçenek","to":"1923"},
+                    {"t":"Hiper Seçenek","to":"2023"},
+                    {"t":"Ultra Mega Kekstra Popkek Topkek Seçenek","to":"2071"}
                 ]
         },
         {
@@ -45,6 +45,15 @@
                     {"t":"Nevet","to":"","r":"4"},
                     {"t":"Nayır","to":"","r":"5"}
                 ]
+        },
+        {
+            "id":"5",
+            "q":"Her şey güzel olacak mı?",
+            "a":[
+                    {"t":"Her şey güzel olacak","to":"","r":"5"},
+                    {"t":"Hayır olmayacak","to":"","r":"6"},
+                    {"t":"Her şey daha daha güzel olacak","to":"","r":"7"}
+                ]
         }
     ],
     "results":[
@@ -53,6 +62,8 @@
         {"id":"2","s":"Arch, Gentoo"},
         {"id":"3","s":"Windows 10"},
         {"id":"4","s":"Windows 7"},
-        {"id":"5","s":"macOs"}
+        {"id":"5","s":"CEHAPELLA"},
+        {"id":"6","s":"MEHAPOLO"},
+        {"id":"7","s":"AKUPUNTO"}
     ]
 }

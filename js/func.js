@@ -109,7 +109,7 @@ function createQuestions(jsonObj){
          }
       };
    
-      /* 
+   /* 
    ###### answerLength()
    ###### Cevap sayısını döndürür
    ######
@@ -121,28 +121,69 @@ function createQuestions(jsonObj){
    
    // Soruların adetini hesaplayıp döngüyü adet kadar çalıştırıyoruz
    for (let questionCount = 0; questionCount < questionLength; questionCount++) {
-      console.log("Soru: " + question(questionCount).id );
-      console.log(question(questionCount).q);
-      console.log(answerLength(questionCount) + " tane seçenek bulundu");
+      
+      // ### İleride newElement() fonksiyonu ile değiştirilecek ###
+      let elemQuestion = document.createElement("ul");
+      elemQuestion.setAttribute("id","q" + questionCount);
+      elemQuestion.innerHTML = "<b style='color:red'>" + question(questionCount).id + "</b> " + question(questionCount).q + "<br> <i>" + answerLength(questionCount) + " tane seçenek bulundu</i>";  
+      document.querySelector("main").appendChild(elemQuestion);
 
+      // Soruya ait cevapların adetini hesaplayıp adet kadar çalıştırıyoruz
       for (let answerCount = 0; answerCount < answerLength(questionCount) ; answerCount++) {
-         var newJSONstrc = jsonObj.questions[questionCount].a[answerCount].t;
-         console.log("Cevap: " + answerCount + " " + newJSONstrc);
+         
+         // ### İleride newElement() fonksiyonu ile değiştirilecek ###
+         let elemAnswer = document.createElement("li");
+         elemAnswer.setAttribute("id", "q" + questionCount + "a" + answerCount);
+         elemAnswer.innerHTML = "<b>Cevap: " + answerCount + "</b> " + answer(question(questionCount),answerCount).t  + toCheck(answer(question(questionCount),answerCount));   
+         document.querySelector("ul:last-child").appendChild(elemAnswer);
       }
 
       // Bu fonksiyon ile seçilen cevap başka soruya mı, yoksa direkt bir sonuca mı götürüyor onu kontrol ediyoruz ve ona uygun gösterimleri sağlıyoruz
       var where;
-      function tocheck(par1) {
-         par1.to !== "" ? where = " <b>(" + par1.to + "</b> numaraya git)" :  where = " <b>(Sonuç ID: " + par1.r + " <span style='color:dodgerblue'>" + jsonObj.results[par1.r].s + "</span></b>)";
+      function toCheck(par1) {
+         par1.to !== "" ? where = " <b>(" + par1.to + "</b> numaraya git)" :  where = " <b>(Sonuç: " + par1.r + " <span style='color:dodgerblue'>" + jsonObj.results[par1.r].s + "</span></b>)";
          return where;
       }
-      
+
       // HTML içinde gerekli elementleri oluşturup JSON'dan gelen verileri uygun kısımlara yerleştiriyoruz
       /*
       var elemType = document.createElement("p");
       elemType.innerHTML = "<b>Soru ID: " + jsonObj.questions[i].id + "</b> " + jsonObj.questions[i].q + "<br><b>Cevaplar: </b>" + jsonObj.questions[i].a1[0].t + tocheck(jsonObj.questions[i].a1[0]) +  " / " + jsonObj.questions[i].a2[0].t + tocheck(jsonObj.questions[i].a2[0]);
       document.querySelector("main").appendChild(elemType);
       */
+
+      
+   }
+   
+}
+
+
+/* 
+###### newElement() ###### UYARI: BU FONKSİYON HENÜZ TAMAMLANMADI
+###### Verilen özelliklerde element oluşturur
+######
+###### param0: Element tipi
+###### param1: Elemente eklenecek HTML öğeleri
+###### param2: Yeni element hangi elementin içinde oluşturulacak?
+###### param3: Element özelliği
+###### param4: Özelliğin değeri
+######
+*/
+function newElement() {
+   if (arguments[0] && arguments[1] !== undefined) {
+      let newElem = document.createElement(arguments[0]);
+
+      if (arguments[3] && arguments[4] !== undefined) {
+         newElem.setAttribute(arguments[3],arguments[4]);
+      } 
+      else {
+         
+      }
+      newElem.innerHTML = arguments[1];
+      document.querySelector(arguments[2]).appendChild(newElem);
+   }
+   else {
+      console.log("Element oluşturulamadı!");
    }
    
 }
