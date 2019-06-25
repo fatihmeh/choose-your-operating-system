@@ -19,15 +19,15 @@
             "q":"Sık sık güncelleme ister misin?",
             "a":[
                     {"t":"Nevet","to":"2"},
-                    {"t":"Nayır","to":"","r":"1"}
+                    {"t":"Nayır","r":"1"}
                 ]
         },
         {
             "id":"2",
             "q":"Sorun yaşarsan biraz uğraşmak seni sıkar mı?",
             "a":[
-                    {"t":"Nevet","to":"","r":"0"},
-                    {"t":"Nayır","to":"","r":"2"}
+                    {"t":"Nevet","r":"0"},
+                    {"t":"Nayır","r":"2"}
                 ]
         },
         {
@@ -35,24 +35,24 @@
             "q":"Gizliliğine çok önem verir misin?",
             "a":[
                     {"t":"Nevet","to":"4"},
-                    {"t":"Nayır","to":"","r":"3"}
+                    {"t":"Nayır","r":"3"}
                 ]
         },
         {
             "id":"4",
             "q":"Oyun odaklı bir sistemi tercih eder misin?",
             "a":[
-                    {"t":"Nevet","to":"","r":"4"},
-                    {"t":"Nayır","to":"","r":"5"}
+                    {"t":"Nevet","r":"4"},
+                    {"t":"Nayır","r":"5"}
                 ]
         },
         {
             "id":"5",
             "q":"Her şey güzel olacak mı?",
             "a":[
-                    {"t":"Her şey güzel olacak","to":"","r":"5"},
-                    {"t":"Hayır olmayacak","to":"","r":"6"},
-                    {"t":"Her şey daha daha güzel olacak","to":"","r":"7"}
+                    {"t":"Her şey güzel olacak","r":"5"},
+                    {"t":"Hayır olmayacak","r":"6"},
+                    {"t":"Her şey daha daha güzel olacak","r":"7"}
                 ]
         }
     ],

@@ -92,14 +92,14 @@ function createQuestions(jsonObj){
    
    /* 
    ###### answer()
-   ###### Cevapları döndürür
+   ###### Belirtilen sorunun tüm cevaplarını veya tek bir cevaba ait anahtarları döndürür
    ######
-   ###### param0: soru[]
-   ###### param1: cevap[]
+   ###### param0: soru
+   ###### param1: cevap
    ######
    */
    let answer = function() {
-         // Parametre 1 tanımlanmışsa ona ait cevabı döndür
+         // Parametre 0 tanımlanmışsa ona ait cevabın anahtarlarını döndür
          if (arguments[1] !== undefined ) {
             return arguments[0].a[arguments[1]]
          }
@@ -111,10 +111,9 @@ function createQuestions(jsonObj){
    
    /* 
    ###### answerLength()
-   ###### Cevap sayısını döndürür
+   ###### Belirtilen sorunun cevap sayısını döndürür
    ######
-   ###### param0: soru[]
-   ###### param1: cevap[]
+   ###### param0: soru
    ######
    */
    let answerLength = function() { return Object.keys(answer(question(arguments[0]))).length }
@@ -134,24 +133,16 @@ function createQuestions(jsonObj){
          // ### İleride newElement() fonksiyonu ile değiştirilecek ###
          let elemAnswer = document.createElement("li");
          elemAnswer.setAttribute("id", "q" + questionCount + "a" + answerCount);
-         elemAnswer.innerHTML = "<b>Cevap: " + answerCount + "</b> " + answer(question(questionCount),answerCount).t  + toCheck(answer(question(questionCount),answerCount));   
+         elemAnswer.innerHTML = "<b>Cevap: " + answerCount + "</b> " + answer(question(questionCount),answerCount).t  + questionOrResult(answer(question(questionCount),answerCount));   
          document.querySelector("ul:last-child").appendChild(elemAnswer);
       }
 
       // Bu fonksiyon ile seçilen cevap başka soruya mı, yoksa direkt bir sonuca mı götürüyor onu kontrol ediyoruz ve ona uygun gösterimleri sağlıyoruz
       var where;
-      function toCheck(par1) {
-         par1.to !== "" ? where = " <b>(" + par1.to + "</b> numaraya git)" :  where = " <b>(Sonuç: " + par1.r + " <span style='color:dodgerblue'>" + jsonObj.results[par1.r].s + "</span></b>)";
+      function questionOrResult() {
+         arguments[0].hasOwnProperty("to") ? where = " <b>(" + arguments[0].to + "</b> numaraya git)" : where = " <b>(Sonuç: " + arguments[0].r + " <span style='color:dodgerblue'>" + jsonObj.results[arguments[0].r].s + "</span></b>)";
          return where;
       }
-
-      // HTML içinde gerekli elementleri oluşturup JSON'dan gelen verileri uygun kısımlara yerleştiriyoruz
-      /*
-      var elemType = document.createElement("p");
-      elemType.innerHTML = "<b>Soru ID: " + jsonObj.questions[i].id + "</b> " + jsonObj.questions[i].q + "<br><b>Cevaplar: </b>" + jsonObj.questions[i].a1[0].t + tocheck(jsonObj.questions[i].a1[0]) +  " / " + jsonObj.questions[i].a2[0].t + tocheck(jsonObj.questions[i].a2[0]);
-      document.querySelector("main").appendChild(elemType);
-      */
-
       
    }
    
