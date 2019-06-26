@@ -99,7 +99,7 @@ function createQuestions(jsonObj){
    ######
    */
    let answer = function() {
-         // Parametre 0 tanımlanmışsa ona ait cevabın anahtarlarını döndür
+         // Parametre 1 tanımlanmışsa ona ait cevabın anahtarlarını döndür
          if (arguments[1] !== undefined ) {
             return arguments[0].a[arguments[1]]
          }
@@ -124,7 +124,7 @@ function createQuestions(jsonObj){
       // ### İleride newElement() fonksiyonu ile değiştirilecek ###
       let elemQuestion = document.createElement("ul");
       elemQuestion.setAttribute("id","q" + questionCount);
-      elemQuestion.innerHTML = "<b style='color:red'>" + question(questionCount).id + "</b> " + question(questionCount).q + "<br> <i>" + answerLength(questionCount) + " tane seçenek bulundu</i>";  
+      elemQuestion.innerHTML = "<b style='color:red'>" + question(questionCount).id + "</b> " + question(questionCount).q + "<br> <i>" + answerLength(questionCount) + " tane seçenek bulundu</i><br><br>";  
       document.querySelector("main").appendChild(elemQuestion);
 
       // Soruya ait cevapların adetini hesaplayıp adet kadar çalıştırıyoruz
@@ -133,14 +133,27 @@ function createQuestions(jsonObj){
          // ### İleride newElement() fonksiyonu ile değiştirilecek ###
          let elemAnswer = document.createElement("li");
          elemAnswer.setAttribute("id", "q" + questionCount + "a" + answerCount);
-         elemAnswer.innerHTML = "<b>Cevap: " + answerCount + "</b> " + answer(question(questionCount),answerCount).t  + questionOrResult(answer(question(questionCount),answerCount));   
+         elemAnswer.innerHTML = "<b style='color:green'>Cevap: " + answerCount + "</b> " + answer(question(questionCount),answerCount).t  + questionOrResult(answer(question(questionCount),answerCount));   
          document.querySelector("ul:last-child").appendChild(elemAnswer);
       }
 
       // Bu fonksiyon ile seçilen cevap başka soruya mı, yoksa direkt bir sonuca mı götürüyor onu kontrol ediyoruz ve ona uygun gösterimleri sağlıyoruz
-      var where;
       function questionOrResult() {
-         arguments[0].hasOwnProperty("to") ? where = " <b>(" + arguments[0].to + "</b> numaraya git)" : where = " <b>(Sonuç: " + arguments[0].r + " <span style='color:dodgerblue'>" + jsonObj.results[arguments[0].r].s + "</span></b>)";
+         let where;
+         if ( arguments[0].hasOwnProperty("to") ) {
+            where = " (<b>" + arguments[0].to + "</b> numaraya git)" ;
+         }
+         else {
+            where = ""; // Boş string yerine undefined vermiştim ama += ile kullanırken return yaptırınca cevaplardan önce "undefined" olarak onu da yazdırıyor
+            console.log(where);
+            console.log(arguments[0].r.length)
+            // Sonuçlarda kaç tane değer varsa hesaplanıp adet kadar çalıştırıyoruz
+            for (let resultCount = 0; resultCount < arguments[0].r.length; resultCount++) {
+               where += " (<b>Sonuç: " + arguments[0].r[resultCount] + " <span style='color:dodgerblue'>" + jsonObj.results[arguments[0].r[resultCount]].s + "</span></b>)";
+               
+               console.log(arguments[0].r[resultCount]);
+            }
+         }
          return where;
       }
       
