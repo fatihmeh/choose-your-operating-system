@@ -2,6 +2,7 @@ var msg1 = "Batsın bu dünya...";
 
 document.querySelector("main").innerHTML = "<p style='color:slategray'><b>" + msg1 + "</b></p>";
 
+
 /*
 
 //// Taslak ////
@@ -119,11 +120,13 @@ function createQuestions(jsonObj){
    let answerLength = function() { return Object.keys(answer(question(arguments[0]))).length }
    
    // Soruların adetini hesaplayıp döngüyü adet kadar çalıştırıyoruz
-   for (let questionCount = 0; questionCount < questionLength; questionCount++) {
+   // ### GEÇİCİ OLARAK DÖNGÜ İPTAL EDİLDİ. SADECE BELİRTİLEN TEK SORU ÇALIŞTIRILIYOR ###
+   questionCount = 1;
+   //for (let questionCount = 0; questionCount < questionLength; questionCount++) {
       
       // ### İleride newElement() fonksiyonu ile değiştirilecek ###
       let elemQuestion = document.createElement("ul");
-      elemQuestion.setAttribute("id","q" + questionCount);
+      elemQuestion.setAttribute("data-question", questionCount);
       elemQuestion.innerHTML = "<b style='color:red'>" + question(questionCount).id + "</b> " + question(questionCount).q + "<br> <i>" + answerLength(questionCount) + " tane seçenek bulundu</i><br><br>";  
       document.querySelector("main").appendChild(elemQuestion);
 
@@ -131,9 +134,9 @@ function createQuestions(jsonObj){
       for (let answerCount = 0; answerCount < answerLength(questionCount) ; answerCount++) {
          
          // ### İleride newElement() fonksiyonu ile değiştirilecek ###
-         let elemAnswer = document.createElement("li");
-         elemAnswer.setAttribute("id", "q" + questionCount + "a" + answerCount);
-         elemAnswer.innerHTML = "<b style='color:green'>Cevap: " + answerCount + "</b> " + answer(question(questionCount),answerCount).t  + questionOrResult(answer(question(questionCount),answerCount));   
+         var elemAnswer = document.createElement("li");
+         elemAnswer.setAttribute("data-answer", answerCount);
+         elemAnswer.innerHTML = "<b style='color:green'>" + answerCount + "</b> " + answer(question(questionCount),answerCount).t  + questionOrResult(answer(question(questionCount),answerCount));   
          document.querySelector("ul:last-child").appendChild(elemAnswer);
       }
 
@@ -141,22 +144,38 @@ function createQuestions(jsonObj){
       function questionOrResult() {
          let where;
          if ( arguments[0].hasOwnProperty("to") ) {
+            elemAnswer.setAttribute("data-go", arguments[0].to);
             where = " (<b>" + arguments[0].to + "</b> numaraya git)" ;
          }
          else {
             where = ""; // Boş string yerine undefined vermiştim ama += ile kullanırken return yaptırınca cevaplardan önce "undefined" olarak onu da yazdırıyor
-            console.log(where);
-            console.log(arguments[0].r.length)
+            //console.log(where);
+            //console.log(arguments[0].r.length)
             // Sonuçlarda kaç tane değer varsa hesaplanıp adet kadar çalıştırıyoruz
+            var resultGo = "";
             for (let resultCount = 0; resultCount < arguments[0].r.length; resultCount++) {
+
+               resultGo += arguments[0].r[resultCount] + " ";
                where += " (<b>Sonuç: " + arguments[0].r[resultCount] + " <span style='color:dodgerblue'>" + jsonObj.results[arguments[0].r[resultCount]].s + "</span></b>)";
                
-               console.log(arguments[0].r[resultCount]);
+               //console.log(arguments[0].r[resultCount]);
             }
+            elemAnswer.setAttribute("data-go", resultGo.split(" ",arguments[0].r.length));
+            //console.log(elemAnswer.getAttribute("data-go"));
          }
          return where;
       }
       
+   //}
+
+   var capturebutton = document.querySelectorAll("[data-answer]");
+
+   for (let i = 0; i < capturebutton.length; i++) {
+
+      capturebutton[i].addEventListener("click", function() {
+         console.log("Say hello to my little friend: " + capturebutton[i].getAttribute("data-go") )
+         }  
+      );
    }
    
 }
