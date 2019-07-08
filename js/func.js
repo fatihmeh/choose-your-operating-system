@@ -68,21 +68,126 @@ request.onload = function() {
 
 function createQuestions(jsonObj){
 
+   // Kullanımı kolaylaştırmak için gerekli değişken tanımlamaları
+
+   /*
+   ###### question()
+   ###### Soruları veya questionLength değişkeni aracılığıyla soru sayısını döndürür
+   ######
+   ###### param0: soru[]
+   ######
+   */
+   let question = function() { 
+         // Parametre tanımlanmışsa ona ait soruyu döndür
+         if (arguments[0] !== undefined ) {
+               return jsonObj.questions[arguments[0]]
+         }
+         // Parametre tanımlanmamışsa tüm soruları döndür
+         else{
+               return jsonObj.questions;
+         }
+      };
+      
+   let questionLength = Object.keys(question()).length;
+   
+   /* 
+   ###### answer()
+   ###### Belirtilen sorunun tüm cevaplarını veya tek bir cevaba ait anahtarları döndürür
+   ######
+   ###### param0: soru
+   ###### param1: cevap
+   ######
+   */
+   let answer = function() {
+         // Parametre 1 tanımlanmışsa ona ait cevabın anahtarlarını döndür
+         if (arguments[1] !== undefined ) {
+            return arguments[0].a[arguments[1]]
+         }
+         // Parametre 1 tanımlanmamışsa tüm cevapları döndür
+         else{
+            return arguments[0].a
+         }
+      };
+   
+   /* 
+   ###### answerLength()
+   ###### Belirtilen sorunun cevap sayısını döndürür
+   ######
+   ###### param0: soru
+   ######
+   */
+   let answerLength = function() { return Object.keys(answer(question(arguments[0]))).length }
+   
    // Soruların adetini hesaplayıp döngüyü adet kadar çalıştırıyoruz
-   for (i = 0; i < Object.keys(jsonObj.questions).length; i++) {
+   for (let questionCount = 0; questionCount < questionLength; questionCount++) {
+      
+      // ### İleride newElement() fonksiyonu ile değiştirilecek ###
+      let elemQuestion = document.createElement("ul");
+      elemQuestion.setAttribute("id","q" + questionCount);
+      elemQuestion.innerHTML = "<b style='color:red'>" + question(questionCount).id + "</b> " + question(questionCount).q + "<br> <i>" + answerLength(questionCount) + " tane seçenek bulundu</i><br><br>";  
+      document.querySelector("main").appendChild(elemQuestion);
+
+      // Soruya ait cevapların adetini hesaplayıp adet kadar çalıştırıyoruz
+      for (let answerCount = 0; answerCount < answerLength(questionCount) ; answerCount++) {
+         
+         // ### İleride newElement() fonksiyonu ile değiştirilecek ###
+         let elemAnswer = document.createElement("li");
+         elemAnswer.setAttribute("id", "q" + questionCount + "a" + answerCount);
+         elemAnswer.innerHTML = "<b style='color:green'>Cevap: " + answerCount + "</b> " + answer(question(questionCount),answerCount).t  + questionOrResult(answer(question(questionCount),answerCount));   
+         document.querySelector("ul:last-child").appendChild(elemAnswer);
+      }
 
       // Bu fonksiyon ile seçilen cevap başka soruya mı, yoksa direkt bir sonuca mı götürüyor onu kontrol ediyoruz ve ona uygun gösterimleri sağlıyoruz
-      var where;
-      function tocheck(par1) {
-         par1.to !== "" ? where = " <b>(" + par1.to + "</b> numaraya git)" :  where = " <b>(Sonuç ID: " + par1.r + " <span style='color:dodgerblue'>" + jsonObj.results[par1.r].s + "</span></b>)";
+      function questionOrResult() {
+         let where;
+         if ( arguments[0].hasOwnProperty("to") ) {
+            where = " (<b>" + arguments[0].to + "</b> numaraya git)" ;
+         }
+         else {
+            where = ""; // Boş string yerine undefined vermiştim ama += ile kullanırken return yaptırınca cevaplardan önce "undefined" olarak onu da yazdırıyor
+            console.log(where);
+            console.log(arguments[0].r.length)
+            // Sonuçlarda kaç tane değer varsa hesaplanıp adet kadar çalıştırıyoruz
+            for (let resultCount = 0; resultCount < arguments[0].r.length; resultCount++) {
+               where += " (<b>Sonuç: " + arguments[0].r[resultCount] + " <span style='color:dodgerblue'>" + jsonObj.results[arguments[0].r[resultCount]].s + "</span></b>)";
+               
+               console.log(arguments[0].r[resultCount]);
+            }
+         }
          return where;
       }
       
-      // HTML içinde gerekli elementleri oluşturup JSON'dan gelen verileri uygun kısımlara yerleştiriyoruz
-      var elemType = document.createElement("p");
-      elemType.innerHTML = "<b>Soru ID: " + jsonObj.questions[i].id + "</b> " + jsonObj.questions[i].q + "<br><b>Cevaplar: </b>" + jsonObj.questions[i].a1[0].t + tocheck(jsonObj.questions[i].a1[0]) +  " / " + jsonObj.questions[i].a2[0].t + tocheck(jsonObj.questions[i].a2[0]);
-      document.querySelector("main").appendChild(elemType);
    }
    
+}
+
+
+/* 
+###### newElement() ###### UYARI: BU FONKSİYON HENÜZ TAMAMLANMADI
+###### Verilen özelliklerde element oluşturur
+######
+###### param0: Element tipi
+###### param1: Elemente eklenecek HTML öğeleri
+###### param2: Yeni element hangi elementin içinde oluşturulacak?
+###### param3: Element özelliği
+###### param4: Özelliğin değeri
+######
+*/
+function newElement() {
+   if (arguments[0] && arguments[1] !== undefined) {
+      let newElem = document.createElement(arguments[0]);
+
+      if (arguments[3] && arguments[4] !== undefined) {
+         newElem.setAttribute(arguments[3],arguments[4]);
+      } 
+      else {
+         
+      }
+      newElem.innerHTML = arguments[1];
+      document.querySelector(arguments[2]).appendChild(newElem);
+   }
+   else {
+      console.log("Element oluşturulamadı!");
+   }
    
 }
