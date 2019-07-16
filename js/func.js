@@ -1,9 +1,11 @@
+/*
+
 var msg1 = "Batsın bu dünya...";
 
 document.querySelector("main").innerHTML = "<p style='color:slategray'><b>" + msg1 + "</b></p>";
 
 
-/*
+
 
 //// Taslak ////
 

@@ -1,11 +1,67 @@
-/* Ekstra stiller */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
 
-/* 
-/// İçerik Tablosu ///
-  -Sıfırlama
-  -Linkler
-  -Yerleşim
-  -...
-*/
+.grid {
+  margin:auto; margin-top:100px; width:80%; justify-content:center; text-align: center;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-template-rows: auto auto auto;
+  grid-gap: 10px;
+  /* background-color: black;  */
+}
 
-/* Tasarım adına çalışacağımız branch içindir. 19-07-14 */
+.grid-item {
+  border: 1px solid grey(0, 0, 0, 0);
+  padding: 20px;
+  font-size: 20px;
+  /* background-color: bisque; */
+  align-items: center;  justify-items: center;
+}
+
+.pri-header{
+  grid-column: 1 / 5;  grid-row: 1 / 2;
+  box-shadow: 0px 4px 0px 0px grey;
+}
+
+.pri-content{
+  height:300px;
+  grid-column: 1 / 5;  grid-row: 2 / 3;
+}
+
+.pri-footer{
+  grid-column: 1 / 5; grid-row: 3 / 4;
+}
+
+.cevap-button{
+  width:400px; height: 100px; background-color: gainsboro; border-radius: 40px;
+}
+
+.soru {
+margin-bottom:40px; margin-top:30px;
+}
+
+.chocolate {
+  color:chocolate;
+}
+
+.darkslateblue {
+  color:darkslateblue;
+}
+.slateblue {
+  color:slateblue;
+}

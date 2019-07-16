@@ -1,40 +1,51 @@
 <!DOCTYPE html>
 <html lang="tr">
 	<head>
+		
 		<meta charset="utf-8" >
 		<meta name="description" content="">
 		<meta name="keywords" content="">
 		<meta name="author" content="">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-		<title>Choose Your OS</title>
-
-		<link rel="icon" type="image/png" href="assets/favicon.png">
+		<link rel="icon" type="image/x-icon" href="assets/favicon.svg">
 		<link rel="stylesheet" href="css/normalize.css">
 		<link rel="stylesheet" href="css/style.css">
 		<script src="js/func.js" defer></script>
-		
+				
+		<title>Choose Your OS</title>
+
 		<style>
 			/* Ekstra stillerin indirilmesini beklememek için genel hatları taşıyan önemli kısımlar buraya konulacak */
-			body {font-family: Arial, Helvetica, sans-serif}
+			body {font-family: Arial, Helvetica, sans-serif; background-image: url("assets/background.svg"); background-size: 960px 960px; background-repeat:repeat; }
+
 		</style>
+
 	</head>
 	
 	<body>
-		<header class="pri-header">
-			<hgroup>
-				<h1>Choose Your OS</h1>
-				<h2></h2>
-			</hgroup>
-			<p>Açıklama</p>
-		</header>
-		
-		<main class="pri-content">
-			
-		</main>
+		<div class="grid">
 
-		<footer class="pri-footer">
-			
-		</footer>
+		<div class="pri-header grid-item">
+			<hgroup>
+				<h2 class="slateblue">CHOOSE YOUR OS!</h2>
+			</hgroup>
+			<p class="darkslateblue">Size en uygun işletim sistemini bulun!</p>
+		</div>
+		
+		<div class="pri-content grid-item">
+			<h2 class="soru chocolate">Soru</h2>
+			<button class="cevap-button chocolate">Cevap 1</button>
+			<button class="cevap-button chocolate">Cevap 2</button>
+		</div>
+
+		<div class="pri-footer grid-item">
+				<a class="footer-links" href="https://github.com/fatihmeh/Choose-Your-Operating-System" target="_blank" title="Repo"><img height="24" width="24" src="https://fatihmeh.github.io/assets/github.svg"/></a>
+				<p>
+				<a class="footer-links" href="https://github.com/obdegirmenci" target="_blank" title="Contributor 1"><img height="24" width="24" src="https://avatars3.githubusercontent.com/u/22788481?s=460&v=4"/></a>
+				<a class="footer-links" href="https://github.com/fatihmeh" target="_blank" title="Contributor 2"><img height="24" width="24" src="https://avatars3.githubusercontent.com/u/34105974?s=460&v=4"/></a>
+				</p>
+		</div>
+
+	</div>
 	</body>
 </html>
