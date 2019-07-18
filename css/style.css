@@ -16,49 +16,61 @@ time, mark, audio, video {
   border: 0;
 }
 
+body {
+   width:100%; height:100%;
+}
+
+
 .grid {
-  margin:auto; margin-top:100px; width:80%; justify-content:center; text-align: center;
+  margin:0;
+  text-align: center;
   display: grid;
-  grid-template-columns: auto auto auto;
-  grid-template-rows: auto auto auto;
+  grid-template-columns: auto auto auto auto;
+  grid-template-rows: 120px 200px 300px;
   grid-gap: 10px;
   /* background-color: black;  */
 }
-
 .grid-item {
-  border: 1px solid grey(0, 0, 0, 0);
   padding: 20px;
   font-size: 20px;
   /* background-color: bisque; */
   align-items: center;  justify-items: center;
 }
-
 .pri-header{
-  grid-column: 1 / 5;  grid-row: 1 / 2;
-  box-shadow: 0px 4px 0px 0px grey;
+  grid-column: 2 / 4;  grid-row: 1 / 2;
+  border-bottom:2px dashed lightslategray;
 }
-
+.pri-header h2{
+  margin-bottom:15px;
+}
 .pri-content{
-  height:300px;
-  grid-column: 1 / 5;  grid-row: 2 / 3;
+  justify-content: center;
+  grid-column: 2 / 4;  grid-row: 2 / 3;
 }
-
 .pri-footer{
-  grid-column: 1 / 5; grid-row: 3 / 4;
+  grid-column: 2 / 4; grid-row: 3 / 4;
+  border-top:2px dashed lightslategray;
 }
-
 .cevap-button{
-  width:400px; height: 100px; background-color: gainsboro; border-radius: 40px;
+  width:250px; height: 60px; font-size:1.5rem;
+  box-shadow: 3px 6px 0px 0px darkslategray;
+  background-color: white;
+  border-radius: 20px;
+  border:1px solid  darkslategray;
+  border-bottom: 0px; border-right:0px;
 }
-
-.soru {
-margin-bottom:40px; margin-top:30px;
+.cevap-button:hover{
+  /* background-color:rgb(235, 235, 235); */
 }
-
+.cevap-button:active{
+  box-shadow: 2px 4px 2px 0px darkslategray;
+}
+#soru {
+  font-size:2rem; margin-bottom:20px;
+}
 .chocolate {
   color:chocolate;
 }
-
 .darkslateblue {
   color:darkslateblue;
 }
