@@ -74,9 +74,9 @@ function createQuestions(jsonObj)
    
       // Soruların adetini hesaplayıp döngüyü adet kadar çalıştırıyoruz
       // ### GEÇİCİ OLARAK DÖNGÜ İPTAL EDİLDİ. SADECE BELİRTİLEN TEK SORU ÇALIŞTIRILIYOR ###
-      // questionCount = 1;
-      for (let questionCount = 0; questionCount < questionLength; questionCount++)
-      {
+      questionCount = 1;
+      // for (let questionCount = 0; questionCount < questionLength; questionCount++)
+      // {
          
          // ### İleride newElement() fonksiyonu ile değiştirilecek ###
          let elemQuestion = document.createElement("ul");
@@ -130,7 +130,7 @@ function createQuestions(jsonObj)
                capturebutton[i].addEventListener(     "click", function()         {         console.log("Say hello to my little friend: " + capturebutton[i].getAttribute("data-go") )    }     );
             }
 
-      } // for (let questionCount = 0; questionCount < questionLength; questionCount++)
+      // } // for (let questionCount = 0; questionCount < questionLength; questionCount++)
 
    } //function createQuestions(jsonObj)
 
