@@ -1,9 +1,7 @@
-/* Kod için açılan branch.
-İngilizce json dosyasını da bu branch üzerinden yapabiliriz. */
-
 {
     "interface":[],
-    "questions":[
+    "questions":
+    [
         {
             "id":"0",
             "q":"Ücretsiz bir sistem mi istersin?",
@@ -59,7 +57,9 @@
                 ]
         }
     ],
-    "results":[
+
+    "results":
+    [
         {"id":"0","s":"Solus"},
         {"id":"1","s":"Mint"},
         {"id":"2","s":"Manjaro"},
@@ -75,4 +75,5 @@
         {"id":"12","s":"ÇAKAL"},
         {"id":"13","s":"KLİMALI CÜPPE"}
     ]
+    
 }
