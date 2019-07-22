@@ -39,7 +39,7 @@ kontrol_fonksiyonu(id) {
       3. cevapSA {sil, 2'ye dön}
       4. cevapSA {...}
       5. cevapSA {sil, 5'in sonucu göster (WinSA)}
-      6. cevapSA {...}
+      6. cevapSA {...} 
       7. cevapSA {...}
       8. cevapSA {sil, 8'in sonucu göster (MacSA)}
       "  "  "
@@ -121,8 +121,8 @@ function createQuestions(jsonObj){
    
    // Soruların adetini hesaplayıp döngüyü adet kadar çalıştırıyoruz
    // ### GEÇİCİ OLARAK DÖNGÜ İPTAL EDİLDİ. SADECE BELİRTİLEN TEK SORU ÇALIŞTIRILIYOR ###
-   questionCount = 1;
-   //for (let questionCount = 0; questionCount < questionLength; questionCount++) {
+   // questionCount = 1;
+   for (let questionCount = 0; questionCount < questionLength; questionCount++) {
       
       // ### İleride newElement() fonksiyonu ile değiştirilecek ###
       let elemQuestion = document.createElement("ul");
@@ -166,7 +166,7 @@ function createQuestions(jsonObj){
          return where;
       }
       
-   //}
+   }
 
    var capturebutton = document.querySelectorAll("[data-answer]");
 
