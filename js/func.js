@@ -26,7 +26,7 @@ function createQuestions(jsonObj)
 {
 
    let question = function()
-      { 
+      {
          // Parametre tanımlanmışsa ona ait soruyu döndür
          if (arguments[0] !== undefined )
          {
@@ -152,7 +152,6 @@ function newElement()
    {
       let newElem = document.createElement(arguments[0]);
       if (arguments[3] && arguments[4] !== undefined) {         newElem.setAttribute(arguments[3],arguments[4]);      }
-
       else {      }
 
       newElem.innerHTML = arguments[1];
