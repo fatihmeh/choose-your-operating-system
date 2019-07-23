@@ -7,3 +7,10 @@
   -Yerleşim
   -...
 */
+
+[data-answer] {
+  cursor: pointer
+}
+[data-answer]:hover {
+  background: #e0e0e0
+}

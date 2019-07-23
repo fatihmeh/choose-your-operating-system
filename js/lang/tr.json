@@ -55,6 +55,36 @@
                     {"t":"Hayır olmayacak","r":["10","12"]},
                     {"t":"Her şey daha daha güzel olacak","r":["11","13"]}
                 ]
+        },
+        {
+            "id":"100",
+            "q":"Abe kaynana?",
+            "a":[
+                    {"t":"Kaynana: ?","to":"101"}
+                ]
+        },
+        {
+            "id":"101",
+            "q":"Naptın bize...",
+            "a":[
+                    {"t":"Kaynana: ???","to":"103"}
+                ]
+        },
+        {
+            "id":"103",
+            "q":"Naaptın bize?",
+            "a":[
+                    {"t":"Kaynana: ????","to":"104"}
+                ]
+        },
+        {
+            "id":"104",
+            "q":"Naaptın bizeEee...",
+            "a":[
+                    {"t":"Kaynana: ???????????????","to":"100"},
+                    {"t":"Peder: ???????????????????","to":"100"},
+                    {"t":"Baldız: ???????????","to":"100"}
+                ]
         }
     ],
 

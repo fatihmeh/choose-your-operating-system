@@ -10,126 +10,129 @@ request.send();
 request.onload = function()
 {
    var jsonRespond = request.response;
-   createQuestions(jsonRespond,"1");
-}
+   //console.log(jsonRespond);
+   createQuestions(jsonRespond,"100"); // Başlangıç sorusu
 
-// jsonObj .json dosyasını temsil ediyor
-function createQuestions(jsonObj)
-{
-
-   /*
-   ###### question()
-   ###### Soruları veya questionLength değişkeni aracılığıyla soru sayısını döndürür
-   ###### param0: soru
-   */
-   let question = function()
+   // jsonObj .json dosyasını temsil ediyor
+   function createQuestions(jsonObj,qID)
    {
-      // Parametre tanımlanmışsa ona ait soruyu döndür
-      if (arguments[0] !== undefined )
-      {
-         return jsonObj.questions[arguments[0]]
-      }
-      // Parametre tanımlanmamışsa tüm soruları döndür
-      else
-      {
-         return jsonObj.questions;
-      }
-   };
-   
-   let questionLength = Object.keys(question()).length;
 
-   /* 
-   ###### answer()
-   ###### Belirtilen sorunun tüm cevaplarını veya tek bir cevaba ait anahtarları döndürür
-   ###### param0: soru
-   ###### param1: cevap
-   */
-   let answer = function()
-   {
-      // Parametre 1 tanımlanmışsa ona ait cevabın anahtarlarını döndür
-      if (arguments[1] !== undefined )
+      /*
+      ###### question()
+      ###### Soruları veya questionLength değişkeni aracılığıyla soru sayısını döndürür
+      ###### param0: soru
+      */
+      let question = function(queryID)
       {
-         return arguments[0].a[arguments[1]]
-      }
-      // Parametre 1 tanımlanmamışsa tüm cevapları döndür
-      else
-      {
-         return arguments[0].a
-      }
-   };
-
-   /* 
-   ###### answerLength()
-   ###### Belirtilen sorunun cevap sayısını döndürür
-   ###### param0: soru
-   */
-   let answerLength = function() { return Object.keys(answer(question(arguments[0]))).length }
-
-   // Soruların adetini hesaplayıp döngüyü adet kadar çalıştırıyoruz
-   // ### GEÇİCİ OLARAK DÖNGÜ İPTAL EDİLDİ. SADECE BELİRTİLEN TEK SORU ÇALIŞTIRILIYOR ###
-   questionCount = arguments[1];
-   // for (let questionCount = 0; questionCount < questionLength; questionCount++)
-   // {
+         // Parametre tanımlanmışsa ona ait soruyu döndür
+         if (queryID !== undefined )
+         {
+            //console.log (jsonObj.questions.find( function(item) { return item.id == qKey } ).q)
+            return jsonObj.questions.find( function(item) { return item.id == queryID } );
+            //return jsonObj.questions[arguments[0]];
+         }
+         // Parametre tanımlanmamışsa tüm soruları döndür
+         else
+         {
+            return jsonObj.questions;
+         }
+      };
       
-         // ### İleride newElement() fonksiyonu ile değiştirilecek ###
-         let elemQuestion = document.createElement("ul");
-         elemQuestion.setAttribute("data-question", questionCount);
-         elemQuestion.innerHTML = "<b style='color:red'>" + question(questionCount).id + "</b> " + question(questionCount).q + "<br> <i>" + answerLength(questionCount) + " tane seçenek bulundu</i><br><br>";  
-         document.querySelector("main").appendChild(elemQuestion);
+      let questionLength = Object.keys(question()).length;
 
-         // Soruya ait cevapların adetini hesaplayıp adet kadar çalıştırıyoruz
-         for (let answerCount = 0; answerCount < answerLength(questionCount) ; answerCount++)
+      /* 
+      ###### answer()
+      ###### Belirtilen sorunun tüm cevaplarını veya tek bir cevaba ait anahtarları döndürür
+      ###### param0: soru
+      ###### param1: cevap
+      */
+      let answer = function(question,answer)
+      {
+         // Parametre 1 tanımlanmışsa ona ait cevabın anahtarlarını döndür
+         if (answer !== undefined )
          {
+            return question.a[answer]
+         }
+         // Parametre 1 tanımlanmamışsa tüm cevapları döndür
+         else
+         {
+            return question.a
+         }
+      };
+
+      /* 
+      ###### answerLength()
+      ###### Belirtilen sorunun cevap sayısını döndürür
+      ###### param0: soru
+      */
+      let answerLength = function() { return Object.keys(answer(question(arguments[0]))).length }
+
+      // Soruların adetini hesaplayıp döngüyü adet kadar çalıştırıyoruz
+      // ### GEÇİCİ OLARAK DÖNGÜ İPTAL EDİLDİ. SADECE BELİRTİLEN TEK SORU ÇALIŞTIRILIYOR ###
+      
+      // for (let qID = 0; qID < questionLength; qID++)
+      // {
+         
             // ### İleride newElement() fonksiyonu ile değiştirilecek ###
-            var elemAnswer = document.createElement("li");
-            elemAnswer.setAttribute("data-answer", answerCount);
-            elemAnswer.innerHTML = "<b style='color:green'>" + answerCount + "</b> " + answer(question(questionCount),answerCount).t  + questionOrResult(answer(question(questionCount),answerCount));   
-            document.querySelector("ul:last-child").appendChild(elemAnswer);
-         }
+            let elemQuestion = document.createElement("ul");
+            elemQuestion.setAttribute("data-question", qID);
+            elemQuestion.innerHTML = "<b style='color:red'>" + question(qID).id + "</b> " + question(qID).q + "<br> <i>" + answerLength(qID) + " tane seçenek bulundu</i><br><br>";  
+            document.querySelector("main").appendChild(elemQuestion);
 
-
-         // Bu fonksiyon ile seçilen cevap başka soruya mı, yoksa direkt bir sonuca mı götürüyor onu kontrol ediyoruz ve ona uygun gösterimleri sağlıyoruz
-         function questionOrResult()
-         {
-            let where;
-            if ( arguments[0].hasOwnProperty("to") )
+            // Soruya ait cevapların adetini hesaplayıp adet kadar çalıştırıyoruz
+            for (let answerCount = 0; answerCount < answerLength(qID) ; answerCount++)
             {
-               elemAnswer.setAttribute("data-go", arguments[0].to);
-               where = " (<b>" + arguments[0].to + "</b> numaraya git)";
+               // ### İleride newElement() fonksiyonu ile değiştirilecek ###
+               var elemAnswer = document.createElement("li");
+               elemAnswer.setAttribute("data-answer", answerCount);
+               elemAnswer.innerHTML = "<b style='color:green'>" + answerCount + "</b> " + answer(question(qID),answerCount).t  + questionOrResult(answer(question(qID),answerCount));   
+               document.querySelector("ul:last-child").appendChild(elemAnswer);
             }
-            else
+
+
+            // Bu fonksiyon ile seçilen cevap başka soruya mı, yoksa direkt bir sonuca mı götürüyor onu kontrol ediyoruz ve ona uygun gösterimleri sağlıyoruz
+            function questionOrResult()
             {
-               where = "";
-               // Sonuçlarda kaç tane değer varsa hesaplanıp adet kadar çalıştırıyoruz
-               var resultGo = "";
-               for (let resultCount = 0; resultCount < arguments[0].r.length; resultCount++)
+               let where;
+               if ( arguments[0].hasOwnProperty("to") )
                {
-                  resultGo += arguments[0].r[resultCount] + " ";
-                  where += " (<b>Sonuç: " + arguments[0].r[resultCount] + " <span style='color:dodgerblue'>" + jsonObj.results[arguments[0].r[resultCount]].s + "</span></b>)";
-                  //console.log(arguments[0].r[resultCount]);
+                  elemAnswer.setAttribute("data-go", arguments[0].to);
+                  where = " (<b>" + arguments[0].to + "</b> numaraya git)";
                }
+               else
+               {
+                  where = "";
+                  // Sonuçlarda kaç tane değer varsa hesaplanıp adet kadar çalıştırıyoruz
+                  var resultGo = "";
+                  for (let resultCount = 0; resultCount < arguments[0].r.length; resultCount++)
+                  {
+                     resultGo += arguments[0].r[resultCount] + " ";
+                     where += " (<b>Sonuç: " + arguments[0].r[resultCount] + " <span style='color:dodgerblue'>" + jsonObj.results[arguments[0].r[resultCount]].s + "</span></b>)";
+                     //console.log(arguments[0].r[resultCount]);
+                  }
 
-               elemAnswer.setAttribute("data-go", resultGo.split(" ",arguments[0].r.length));
-               //console.log(elemAnswer.getAttribute("data-go"));
+                  elemAnswer.setAttribute("data-go", resultGo.split(" ",arguments[0].r.length));
+                  //console.log(elemAnswer.getAttribute("data-go"));
+               }
+               return where;
             }
-            return where;
-         }
 
-         var capturebutton = document.querySelectorAll("[data-answer]");
-         for (let i = 0; i < capturebutton.length; i++)
-         {
-            capturebutton[i].addEventListener("click", function(){
-               console.log("Say hello to my little friend: " + capturebutton[i].getAttribute("data-go"));
-               // Bu aşamada soruyu belirlediğim başka bir soru ile değiştirmeye çalışacağım
-               // Ama fonksiyonların kapsamıyla ilgili ufak sıkıntılar var onları halletmem gerek
-               //createQuestions(jsonRespond,"2");
-            });
-         }
+            var capturebutton = document.querySelectorAll("[data-answer]");
+            for (let i = 0; i < capturebutton.length; i++)
+            {
+               capturebutton[i].addEventListener("click", function(){
+                  console.log("Say hello to my little friend: " + capturebutton[i].getAttribute("data-go"));
+                  // Bu aşamada soruyu belirlediğim başka bir soru ile değiştirmeye çalışacağım
+                  // Ama fonksiyonların kapsamıyla ilgili ufak sıkıntılar var onları halletmem gerek
+                  document.querySelector("main").innerHTML = "";
+                  createQuestions(jsonRespond,capturebutton[i].getAttribute("data-go"));
+               });
+            }
 
-   // } // for (let questionCount = 0; questionCount < questionLength; questionCount++)
+      // } // for (let qID = 0; qID < questionLength; qID++)
 
-} //function createQuestions(jsonObj)
-
+   } //function createQuestions(jsonObj)
+}
 /* 
 ###### newElement() ###### UYARI: BU FONKSİYON HENÜZ TAMAMLANMADI
 ###### Verilen özelliklerde element oluşturur
