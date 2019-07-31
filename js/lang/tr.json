@@ -3,107 +3,110 @@
     "questions":
     [
         {
-            "id":"0",
+            "id":0,
             "q":"Ücretsiz bir sistem mi istersin?",
             "a":[
-                    {"t":"Evet","to":"1"},
-                    {"t":"Hayır","to":"3"},
-                    {"t":"Ekstra Seçenek","to":"1071"},
-                    {"t":"Ultra Seçenek","to":"1453"},
-                    {"t":"Mega Seçenek","to":"1923"},
-                    {"t":"Hiper Seçenek","to":"2023"},
-                    {"t":"Ultra Mega Kekstra Popkek Topkek Seçenek","to":"2071"}
+                    {"t":"Evet","to":1},
+                    {"t":"Hayır","to":3},
+                    {"t":"Ekstra Seçenek","to":1071},
+                    {"t":"Ultra Seçenek","to":1453},
+                    {"t":"Mega Seçenek","to":1923},
+                    {"t":"Hiper Seçenek","to":2023},
+                    {"t":"Ultra Mega Kekstra Popkek Topkek Seçenek","to":2071}
                 ]
         },
         {
-            "id":"1",
+            "id":1,
             "q":"Sık sık güncelleme ister misin?",
             "a":[
-                    {"t":"Nevet","to":"2"},
-                    {"t":"Nayır","r":["1","5"]}
+                    {"t":"Nevet","to":2},
+                    {"t":"Nayır","r":[1,5]}
                 ]
         },
         {
-            "id":"2",
+            "id":2,
             "q":"Sorun yaşarsan biraz uğraşmak seni sıkar mı?",
             "a":[
-                    {"t":"Nevet","r":["0","2"]},
-                    {"t":"Nayır","r":["3","4"]}
+                    {"t":"Nevet","r":[0,2]},
+                    {"t":"Nayır","r":[3,4]}
                 ]
         },
         {
-            "id":"3",
+            "id":3,
             "q":"Gizliliğine çok önem verir misin?",
             "a":[
-                    {"t":"Nevet","to":"4"},
-                    {"t":"Nayır","r":["7"]}
+                    {"t":"Nevet","to":4},
+                    {"t":"Nayır","r":[7]}
                 ]
         },
         {
-            "id":"4",
+            "id":4,
             "q":"Oyun odaklı bir sistemi tercih eder misin?",
             "a":[
-                    {"t":"Nevet","r":["6"]},
-                    {"t":"Nayır","r":["8"]}
+                    {"t":"Nevet","r":[6]},
+                    {"t":"Nayır","r":[8]}
                 ]
         },
         {
-            "id":"5",
+            "id":5,
             "q":"Her şey güzel olacak mı?",
             "a":[
-                    {"t":"Her şey güzel olacak","r":["9"]},
-                    {"t":"Hayır olmayacak","r":["10","12"]},
-                    {"t":"Her şey daha daha güzel olacak","r":["11","13"]}
+                    {"t":"Her şey güzel olacak","r":[9]},
+                    {"t":"Hayır olmayacak","r":[10,12]},
+                    {"t":"Her şey daha daha güzel olacak","r":[11,13]}
                 ]
         },
         {
-            "id":"100",
+            "id":100,
             "q":"Abe kaynana?",
             "a":[
-                    {"t":"Kaynana: ?","to":"101"}
+                    {"t":"Kaynana: ?","to":101},
+                    {"t":"Hap koydum hap koydum içine de hap koydum...","r":[200,201]}
                 ]
         },
         {
-            "id":"101",
+            "id":101,
             "q":"Naptın bize...",
             "a":[
-                    {"t":"Kaynana: ???","to":"103"}
+                    {"t":"Kaynana: ???","to":103}
                 ]
         },
         {
-            "id":"103",
+            "id":103,
             "q":"Naaptın bize?",
             "a":[
-                    {"t":"Kaynana: ????","to":"104"}
+                    {"t":"Kaynana: ????","to":104}
                 ]
         },
         {
-            "id":"104",
+            "id":104,
             "q":"Naaptın bizeEee...",
             "a":[
-                    {"t":"Kaynana: ???????????????","to":"100"},
-                    {"t":"Peder: ???????????????????","to":"100"},
-                    {"t":"Baldız: ???????????","to":"100"}
+                    {"t":"Kaynana: ???????????????","to":100},
+                    {"t":"Peder: ???????????????????","to":100},
+                    {"t":"Baldız: ???????????","to":100}
                 ]
         }
     ],
 
     "results":
     [
-        {"id":"0","s":"Solus"},
-        {"id":"1","s":"Mint"},
-        {"id":"2","s":"Manjaro"},
-        {"id":"3","s":"Arch"},
-        {"id":"4","s":"Gentoo"},
-        {"id":"5","s":"Fedora"},
-        {"id":"6","s":"Windows 7"},
-        {"id":"7","s":"Windows 10"},
-        {"id":"8","s":"macOS"},
-        {"id":"9","s":"CEHAPELLA"},
-        {"id":"10","s":"MEHAPOLO"},
-        {"id":"11","s":"AKUPUNTO"},
-        {"id":"12","s":"ÇAKAL"},
-        {"id":"13","s":"KLİMALI CÜPPE"}
+        {"id":0,"s":"Solus"},
+        {"id":1,"s":"Mint"},
+        {"id":2,"s":"Manjaro"},
+        {"id":3,"s":"Arch"},
+        {"id":4,"s":"Gentoo"},
+        {"id":5,"s":"Fedora"},
+        {"id":6,"s":"Windows 7"},
+        {"id":7,"s":"Windows 10"},
+        {"id":8,"s":"macOS"},
+        {"id":9,"s":"CEHAPELLA"},
+        {"id":10,"s":"MEHAPOLO"},
+        {"id":11,"s":"AKUPUNTO"},
+        {"id":12,"s":"ÇAKAL"},
+        {"id":13,"s":"KLİMALI CÜPPE"},
+        {"id":200,"s":"Kaynanan bayıldı"},
+        {"id":201,"s":"Kaynanan ÖLDÜ!"}
     ]
     
 }

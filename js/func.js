@@ -11,7 +11,8 @@ request.onload = function()
 {
    var jsonRespond = request.response;
    //console.log(jsonRespond);
-   createQuestions(jsonRespond,"100"); // Başlangıç sorusu
+   let firstQuestion = 100;
+   createQuestions(jsonRespond,firstQuestion); // Başlangıç sorusu
 
    // jsonObj .json dosyasını temsil ediyor
    function createQuestions(jsonObj,qID)
@@ -85,7 +86,8 @@ request.onload = function()
                // ### İleride newElement() fonksiyonu ile değiştirilecek ###
                var elemAnswer = document.createElement("li");
                elemAnswer.setAttribute("data-answer", answerCount);
-               elemAnswer.innerHTML = "<b style='color:green'>" + answerCount + "</b> " + answer(question(qID),answerCount).t  + questionOrResult(answer(question(qID),answerCount));   
+               elemAnswer.innerHTML = "<b style='color:green'>" + answerCount + "</b> " + answer(question(qID),answerCount).t;
+               questionOrResult(answer(question(qID),answerCount));   
                document.querySelector("ul:last-child").appendChild(elemAnswer);
             }
 
@@ -93,28 +95,28 @@ request.onload = function()
             // Bu fonksiyon ile seçilen cevap başka soruya mı, yoksa direkt bir sonuca mı götürüyor onu kontrol ediyoruz ve ona uygun gösterimleri sağlıyoruz
             function questionOrResult()
             {
-               let where;
+               //let where;
                if ( arguments[0].hasOwnProperty("to") )
                {
                   elemAnswer.setAttribute("data-go", arguments[0].to);
-                  where = " (<b>" + arguments[0].to + "</b> numaraya git)";
+                  //where = " (<b>" + arguments[0].to + "</b> numaraya git)";
                }
                else
                {
-                  where = "";
+                  //where = "";
                   // Sonuçlarda kaç tane değer varsa hesaplanıp adet kadar çalıştırıyoruz
                   var resultGo = "";
                   for (let resultCount = 0; resultCount < arguments[0].r.length; resultCount++)
                   {
                      resultGo += arguments[0].r[resultCount] + " ";
-                     where += " (<b>Sonuç: " + arguments[0].r[resultCount] + " <span style='color:dodgerblue'>" + jsonObj.results[arguments[0].r[resultCount]].s + "</span></b>)";
+                     //where += " (<b>Sonuç: " + arguments[0].r[resultCount] + " <span style='color:dodgerblue'>" + jsonObj.results[arguments[0].r[resultCount]].s + "</span></b>)";
                      //console.log(arguments[0].r[resultCount]);
                   }
 
-                  elemAnswer.setAttribute("data-go", resultGo.split(" ",arguments[0].r.length));
+                  elemAnswer.setAttribute("data-stop", resultGo.split(" ",arguments[0].r.length));
                   //console.log(elemAnswer.getAttribute("data-go"));
                }
-               return where;
+               //return where;
             }
 
             var capturebutton = document.querySelectorAll("[data-answer]");
@@ -125,10 +127,38 @@ request.onload = function()
                   // Bu aşamada soruyu belirlediğim başka bir soru ile değiştirmeye çalışacağım
                   // Ama fonksiyonların kapsamıyla ilgili ufak sıkıntılar var onları halletmem gerek
                   let e = document.querySelector("[data-question]");
-                  e.remove(e[0]);
-                  createQuestions(jsonRespond,capturebutton[i].getAttribute("data-go"));
+                  if (capturebutton[i].hasAttribute("data-go")) {
+                     e.remove(e[0]);
+                     createQuestions(jsonRespond,capturebutton[i].getAttribute("data-go"));
+                     //alert("BAŞKA SORU");
+                  }
+                  else if (capturebutton[i].hasAttribute("data-stop")) {
+                     e.remove(e[0]);
+                     createResults(capturebutton[i].getAttribute("data-stop"));
+                  }
+                  else {
+                     alert("Geçerli bir seçenek değil!")
+                  }
                });
             }
+
+            // Sonuçları getir
+            function createResults() {
+               //alert("SONUÇ!!!");
+               let e = document.querySelector("main");
+               
+               let rID = arguments[0].split(",");
+               console.log(typeof(rID));
+               console.log(rID);
+
+               for (let i = 0; i < rID.length; i++) {
+                  let result = jsonObj.results.find( function(item) { return item.id == rID[i] } );  
+                  e.innerHTML += rID[i] + "-" + result.s +"<br>";
+               }
+               //let elemResult = document.createElement("ul");
+               //elemResults.setAttribute("data-result",)
+            }
+
 
       // } // for (let qID = 0; qID < questionLength; qID++)
 
