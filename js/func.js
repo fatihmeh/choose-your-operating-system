@@ -121,10 +121,11 @@ request.onload = function()
             for (let i = 0; i < capturebutton.length; i++)
             {
                capturebutton[i].addEventListener("click", function(){
-                  console.log("Say hello to my little friend: " + capturebutton[i].getAttribute("data-go"));
+                  //console.log("Say hello to my little friend: " + capturebutton[i].getAttribute("data-go"));
                   // Bu aşamada soruyu belirlediğim başka bir soru ile değiştirmeye çalışacağım
                   // Ama fonksiyonların kapsamıyla ilgili ufak sıkıntılar var onları halletmem gerek
-                  document.querySelector("main").innerHTML = "";
+                  let e = document.querySelector("[data-question]");
+                  e.remove(e[0]);
                   createQuestions(jsonRespond,capturebutton[i].getAttribute("data-go"));
                });
             }
