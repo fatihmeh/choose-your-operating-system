@@ -19,32 +19,32 @@
             "id":1,
             "q":"Sık sık güncelleme ister misin?",
             "a":[
-                    {"t":"Nevet","to":2},
-                    {"t":"Nayır","r":[1,5]}
+                    {"t":"Evet","to":2},
+                    {"t":"Hayır","r":[1,5]}
                 ]
         },
         {
             "id":2,
             "q":"Sorun yaşarsan biraz uğraşmak seni sıkar mı?",
             "a":[
-                    {"t":"Nevet","r":[0,2]},
-                    {"t":"Nayır","r":[3,4]}
+                    {"t":"Evet","r":[0,2]},
+                    {"t":"Hayır","r":[3,4]}
                 ]
         },
         {
             "id":3,
             "q":"Gizliliğine çok önem verir misin?",
             "a":[
-                    {"t":"Nevet","to":4},
-                    {"t":"Nayır","r":[7]}
+                    {"t":"Evet","to":4},
+                    {"t":"Hayır","r":[7]}
                 ]
         },
         {
             "id":4,
             "q":"Oyun odaklı bir sistemi tercih eder misin?",
             "a":[
-                    {"t":"Nevet","r":[6]},
-                    {"t":"Nayır","r":[8]}
+                    {"t":"Evet","r":[6]},
+                    {"t":"Hayır","r":[8]}
                 ]
         },
         {

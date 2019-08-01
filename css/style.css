@@ -7,8 +7,16 @@
   -Yerleşim
   -...
 */
+[data-question] {
+  list-style: none;
+}
 
 [data-answer] {
+  width: 200px;
+  margin: 2px;
+  padding: 12px;
+  border: 1px solid gray;
+  border-radius: 4px;
   cursor: pointer
 }
 [data-answer]:hover {
