@@ -10,7 +10,15 @@ request.send();
 request.onload = function()
 {
    var jsonRespond = request.response;
-   let firstQuestion = 100; // Başlangıç sorusu
+   let firstQuestion = 0; // Başlangıç sorusu
+   let questionCount = 0; // Soru sayacı
+   // Dil değişkenleri testi ##### Bunlar fonksiyona çevrilmeli #####
+   console.log( Object.keys(jsonRespond.interface).length );
+   document.querySelector(".pri-header h1").textContent = jsonRespond.interface.title;
+   document.querySelector(".pri-header h2").textContent = jsonRespond.interface.subtitle;
+   document.querySelector(".pri-header p").textContent = jsonRespond.interface.description;
+   document.querySelector(".pri-footer").textContent = jsonRespond.interface.lang + jsonRespond.interface.activelang;
+   
    createQuestions(jsonRespond,firstQuestion);
 
    // jsonObj .json dosyasını temsil ediyor
@@ -64,9 +72,10 @@ request.onload = function()
       }
          
       // ### İleride newElement() fonksiyonu ile değiştirilecek ###
+      questionCount += 1;
       let elemQuestion = document.createElement("ul");
       elemQuestion.setAttribute("data-question", qID);
-      elemQuestion.innerHTML = "<b style='color:red'>" + question(qID).id + "</b> " + question(qID).q + "<br> <i>" + answerLength(qID) + " tane seçenek bulundu</i><br><br>";  
+      elemQuestion.innerHTML = "<b style='color:red'>" + questionCount + "</b> " + question(qID).q + "<br><br>";  
       document.querySelector("main").appendChild(elemQuestion);
 
       // Soruya ait cevapların adetini hesaplar ve elementleri oluşturur
@@ -121,11 +130,7 @@ request.onload = function()
       // Sonuçları getirir
       function createResults() {
          let e = document.querySelector("main");
-         
          let rID = arguments[0].split(",");
-         console.log(typeof(rID));
-         console.log(rID);
-
          for (let i = 0; i < rID.length; i++) {
             let result = jsonObj.results.find( function(item) { return item.id == rID[i] } );  
             e.innerHTML += rID[i] + "-" + result.s +"<br>";

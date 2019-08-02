@@ -1,0 +1,70 @@
+{
+    "interface":{
+        "title":"Choose Your Operation System",
+        "subtitle":"An interactive web interface...",
+        "description":"Take a look at our suggestions and decide which operating system is right for you.",
+        "devs":"Developers:",
+        "lang":"Language:",
+        "activelang":"en",
+        "appdescription":"Answer the questions according to your preferences.",
+        "appstart":"Start",
+        "appresults":"Congratulations, you're done!",
+        "apprestart":"Return to Start"
+    },
+    "questions":
+    [
+        {
+            "id":0,
+            "q":"Ücretsiz bir sistem mi istersin?",
+            "a":[
+                    {"t":"Evet","to":1},
+                    {"t":"Hayır","to":3}
+                ]
+        },
+        {
+            "id":1,
+            "q":"Sık sık güncelleme ister misin?",
+            "a":[
+                    {"t":"Evet","to":2},
+                    {"t":"Hayır","r":[1,5]}
+                ]
+        },
+        {
+            "id":2,
+            "q":"Sorun yaşarsan biraz uğraşmak seni sıkar mı?",
+            "a":[
+                    {"t":"Evet","r":[0,2]},
+                    {"t":"Hayır","r":[3,4]}
+                ]
+        },
+        {
+            "id":3,
+            "q":"Gizliliğine çok önem verir misin?",
+            "a":[
+                    {"t":"Evet","to":4},
+                    {"t":"Hayır","r":[7]}
+                ]
+        },
+        {
+            "id":4,
+            "q":"Oyun odaklı bir sistemi tercih eder misin?",
+            "a":[
+                    {"t":"Evet","r":[6]},
+                    {"t":"Hayır","r":[8]}
+                ]
+        }
+    ],
+    "results":
+    [
+        {"id":0,"s":"Solus"},
+        {"id":1,"s":"Mint"},
+        {"id":2,"s":"Manjaro"},
+        {"id":3,"s":"Arch"},
+        {"id":4,"s":"Gentoo"},
+        {"id":5,"s":"Fedora"},
+        {"id":6,"s":"Windows 7"},
+        {"id":7,"s":"Windows 10"},
+        {"id":8,"s":"macOS"}
+    ]
+    
+}
