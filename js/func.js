@@ -13,36 +13,30 @@ request.onload = function()
    let firstQuestion = 0; // Başlangıç sorusu
    let questionCount = 0; // Soru sayacı
    // Dil değişkenleri testi ##### Bunlar fonksiyona çevrilmeli #####
-   console.log( Object.keys(jsonRespond.interface).length );
+   //console.log( Object.keys(jsonRespond.interface).length );
    document.querySelector(".pri-header h1").textContent = jsonRespond.interface.title;
    document.querySelector(".pri-header h2").textContent = jsonRespond.interface.subtitle;
    document.querySelector(".pri-header p").textContent = jsonRespond.interface.description;
    document.querySelector(".pri-footer").textContent = jsonRespond.interface.lang + jsonRespond.interface.activelang;
    
-   createQuestions(jsonRespond,firstQuestion);
+   createQuestions(jsonRespond, firstQuestion);
 
    // jsonObj .json dosyasını temsil ediyor
-   function createQuestions(jsonObj,qID)
-   {
+   function createQuestions(jsonObj, qID) {
 
       /*
       ###### question()
       ###### Soruları veya questionLength değişkeni aracılığıyla soru sayısını döndürür
       ###### param0: soru
       */
-      let question = function(queryID)
-      {
-         if (queryID !== undefined )
-         {
-            return jsonObj.questions.find( function(item) { return item.id === queryID } );
+      let question = searchID => {
+         if (searchID !== undefined) {
+            return jsonObj.questions.find(question => question.id === searchID);
          }
-         else
-         {
-            return jsonObj.questions;
-         }
-      };
+         return jsonObj.questions;
+      }
       
-      let questionLength = Object.keys(question()).length;
+      let questionLength = Object.keys( question() ).length;
 
       /* 
       ###### answer()
@@ -50,26 +44,21 @@ request.onload = function()
       ###### param0: soru
       ###### param1: cevap
       */
-      let answer = function(question,answer)
-      {
-         if (answer !== undefined )
-         {
-            return question.a[answer]
+      let answer = (question, answerID) => {
+         if (answerID !== undefined) {
+            return question.a[answerID]
          }
-         else
-         {
-            return question.a
-         }
-      };
+         return question.a;
+      }
 
       /* 
       ###### answerLength()
       ###### Belirtilen sorunun cevap sayısını döndürür
       ###### param0: soru
       */
-      let answerLength = function() {
-         return Object.keys( answer( question(arguments[0]) ) ).length
-      }
+      let answerLength = a => {
+         return Object.keys( answer( question(a) ) ).length;
+      };
          
       // ### İleride newElement() fonksiyonu ile değiştirilecek ###
       questionCount += 1;
@@ -79,8 +68,7 @@ request.onload = function()
       document.querySelector("main").appendChild(elemQuestion);
 
       // Soruya ait cevapların adetini hesaplar ve elementleri oluşturur
-      for (let answerCount = 0; answerCount < answerLength(qID) ; answerCount++)
-      {
+      for (let answerCount = 0; answerCount < answerLength(qID) ; answerCount++) {
          // ### İleride newElement() fonksiyonu ile değiştirilecek ###
          var elemAnswer = document.createElement("li");
          elemAnswer.setAttribute("data-answer", answerCount);
@@ -90,14 +78,11 @@ request.onload = function()
       }
 
       // Seçeneği başka bir soru veya sonuç olarak ayarlar
-      function questionOrResult()
-      {
+      function questionOrResult() {
          if ( arguments[0].hasOwnProperty("to") )
          {
             elemAnswer.setAttribute("data-go", arguments[0].to);
-         }
-         else
-         {
+         } else {
             let dataStop = "";
             for (let resultCount = 0; resultCount < arguments[0].r.length; resultCount++)
             {
@@ -122,7 +107,7 @@ request.onload = function()
                createResults(answerbutton[i].getAttribute("data-stop"));
             }
             else {
-               alert("Geçerli bir seçenek değil!")
+               alert("Geçerli bir seçenek değil!");
             }
          });
       }
@@ -130,10 +115,10 @@ request.onload = function()
       // Sonuçları getirir
       function createResults() {
          let e = document.querySelector("main");
-         let rID = arguments[0].split(",");
-         for (let i = 0; i < rID.length; i++) {
-            let result = jsonObj.results.find( function(item) { return item.id == rID[i] } );  
-            e.innerHTML += rID[i] + "-" + result.s +"<br>";
+         searchID = arguments[0].split(",");
+         for (let i = 0; i < searchID.length; i++) {
+            let results = jsonObj.results.find(result => { return result.id == searchID[i] });  
+            e.innerHTML += searchID[i] + "-" + results.s + "<br>";
          }
          //let elemResult = document.createElement("ul");
          //elemResults.setAttribute("data-result",)
