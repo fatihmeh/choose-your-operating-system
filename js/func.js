@@ -122,6 +122,18 @@ request.onload = function()
          }
          //let elemResult = document.createElement("ul");
          //elemResults.setAttribute("data-result",)
+
+         let elemReset = document.createElement("button");
+         elemReset.setAttribute("id","reset");
+         elemReset.textContent = jsonRespond.interface.apprestart;
+         e.appendChild(elemReset);
+
+         let resetbutton = document.querySelector("#reset");
+         resetbutton.addEventListener("click", function(){
+            e.innerHTML = "";
+            questionCount = firstQuestion;
+            createQuestions(jsonRespond, firstQuestion);
+         });
       }
 
    } //function createQuestions(jsonObj)
