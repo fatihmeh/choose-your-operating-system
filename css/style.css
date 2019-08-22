@@ -22,3 +22,33 @@
 [data-answer]:hover {
   background: #e0e0e0
 }
+
+body {
+  overflow-x: hidden;
+}
+
+.fadeOut {
+  position: relative;
+  animation-name: fadeOut;
+  animation-duration: 0.2s;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+}
+
+@keyframes fadeOut {
+  from {left: 0px}
+  to {left: -20px; opacity: 0;}
+}
+
+.fadeIn {
+  position: relative;
+  animation-name: fadeIn;
+  animation-duration: 0.3s;
+  animation-iteration-count: 1;
+  animation-direction: reverse;
+}
+
+@keyframes fadeIn {
+  from {left: 0px}
+  to {left: 20px; opacity: 0;}
+}

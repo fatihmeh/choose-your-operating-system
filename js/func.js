@@ -66,6 +66,7 @@ request.onload = function()
       elemQuestion.setAttribute("data-question", qID);
       elemQuestion.innerHTML = "<b style='color:red'>" + questionCount + "</b> " + question(qID).q + "<br><br>";  
       document.querySelector("main").appendChild(elemQuestion);
+      elemQuestion.className = "fadeIn";
 
       // Soruya ait cevapların adetini hesaplar ve elementleri oluşturur
       for (let answerCount = 0; answerCount < answerLength(qID) ; answerCount++) {
@@ -98,17 +99,23 @@ request.onload = function()
       {
          answerbutton[i].addEventListener("click", function(){
             let e = document.querySelector("[data-question]");
-            if (answerbutton[i].hasAttribute("data-go")) {
+            // CSS3 olay yakalama testi. Başarılı olursam bunu arayüzdeki aksiyonlara entegre edeceğim.
+            e.className = "fadeOut";
+            e.addEventListener("animationend", function(){
                e.remove(e[0]);
-               createQuestions(jsonRespond,Number( answerbutton[i].getAttribute("data-go") ));
-            }
-            else if (answerbutton[i].hasAttribute("data-stop")) {
-               e.remove(e[0]);
-               createResults(answerbutton[i].getAttribute("data-stop"));
-            }
-            else {
-               alert("Geçerli bir seçenek değil!");
-            }
+               if (answerbutton[i].hasAttribute("data-go")) {
+                  
+                  createQuestions(jsonRespond,Number( answerbutton[i].getAttribute("data-go") ));
+               }
+               else if (answerbutton[i].hasAttribute("data-stop")) {
+                  
+                  createResults(answerbutton[i].getAttribute("data-stop"));
+               }
+               else {
+                  // Geçersiz veri varsa aynı soruyu döndür. createQuestions(jsonRespond,Number( document.querySelector("[data-question]") ));
+                  alert("Geçerli bir seçenek değil!");
+               }
+            });
          });
       }
 
