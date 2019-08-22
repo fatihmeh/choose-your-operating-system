@@ -11,7 +11,7 @@ request.onload = function()
 {
    var jsonRespond = request.response;
    let firstQuestion = 0; // Başlangıç sorusu
-   let questionCount = 0; // Soru sayacı
+   let questionCount = 1; // Soru sayacı
    // Dil değişkenleri testi ##### Bunlar fonksiyona çevrilmeli #####
    //console.log( Object.keys(jsonRespond.interface).length );
    document.querySelector(".pri-header h1").textContent = jsonRespond.interface.title;
@@ -61,7 +61,6 @@ request.onload = function()
       };
          
       // ### İleride newElement() fonksiyonu ile değiştirilecek ###
-      questionCount += 1;
       let elemQuestion = document.createElement("ul");
       elemQuestion.setAttribute("data-question", qID);
       elemQuestion.innerHTML = "<b style='color:red'>" + questionCount + "</b> " + question(qID).q + "<br><br>";  
@@ -73,7 +72,7 @@ request.onload = function()
          // ### İleride newElement() fonksiyonu ile değiştirilecek ###
          var elemAnswer = document.createElement("li");
          elemAnswer.setAttribute("data-answer", answerCount);
-         elemAnswer.innerHTML = "<b style='color:green'>" + answerCount + "</b> " + answer(question(qID),answerCount).t;
+         elemAnswer.innerHTML = answer(question(qID),answerCount).t;
          questionOrResult(answer(question(qID),answerCount));   
          document.querySelector("ul:last-child").appendChild(elemAnswer);
       }
@@ -104,16 +103,17 @@ request.onload = function()
             e.addEventListener("animationend", function(){
                e.remove(e[0]);
                if (answerbutton[i].hasAttribute("data-go")) {
-                  
+                  questionCount += 1;
                   createQuestions(jsonRespond,Number( answerbutton[i].getAttribute("data-go") ));
                }
                else if (answerbutton[i].hasAttribute("data-stop")) {
-                  
+                  questionCount += 1;
                   createResults(answerbutton[i].getAttribute("data-stop"));
                }
                else {
-                  // Geçersiz veri varsa aynı soruyu döndür. createQuestions(jsonRespond,Number( document.querySelector("[data-question]") ));
-                  alert("Geçerli bir seçenek değil!");
+                  // Geçersiz veri varsa aynı soruyu döndür.
+                  createQuestions(jsonRespond,Number( e.getAttribute("data-question") ));
+                  console.log("Geçerli bir seçenek değil!");
                }
             });
          });
@@ -123,28 +123,21 @@ request.onload = function()
       function createResults() {
          let e = document.querySelector("main");
          searchID = arguments[0].split(",");
+
+         elemResultContainer = newElement("ul","main",undefined,"id","suggestions");
+         elemResultContainer.className = "fadeIn";
+         
          for (let i = 0; i < searchID.length; i++) {
             let results = jsonObj.results.find(result => { return result.id == searchID[i] });  
-            e.innerHTML += searchID[i] + "-" + results.s + "<br>";
+            //e.innerHTML += searchID[i] + "-" + results.s + "<br>";
+            elemResult = newElement("li","#suggestions",results.s,"data-result",searchID[i]);
          }
-         //let elemResult = document.createElement("ul");
-         //elemResults.setAttribute("data-result",)
          
-         // Aynı işi yapan eski kod
-         /*
-         let elemReset = document.createElement("button");
-         elemReset.setAttribute("id","reset");
-         elemReset.textContent = jsonRespond.interface.apprestart;
-         e.appendChild(elemReset);
-         */
-
-         // Aynı işi yapan yeni kod
-         let elemReset = newElement("button","main",jsonRespond.interface.apprestart,"id","reset");
-
+         let elemReset = newElement("button","#suggestions",jsonRespond.interface.apprestart,"id","reset");
          let resetbutton = document.querySelector("#reset");
          resetbutton.addEventListener("click", function(){
             e.innerHTML = "";
-            questionCount = firstQuestion;
+            questionCount = 1;
             createQuestions(jsonRespond, firstQuestion);
          });
       }
@@ -181,7 +174,7 @@ function newElement(eType, ePos, eCont, eAttr, eAttrVal)  {
          newElem.setAttribute(eAttr,eAttrVal);
       }
 
-      document.querySelector(ePos).appendChild(newElem);
+      return document.querySelector(ePos).appendChild(newElem);
    }
    else {console.log("Element oluşturulamadı! Eksik parametre.")}
 }

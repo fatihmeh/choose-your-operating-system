@@ -17,40 +17,40 @@
             "id":0,
             "q":"Ücretsiz bir sistem mi istersin?",
             "a":[
-                    {"t":"Evet","to":1},
-                    {"t":"Hayır","to":3}
+                    {"t":"Yes","to":1},
+                    {"t":"No","to":3}
                 ]
         },
         {
             "id":1,
             "q":"Sık sık güncelleme ister misin?",
             "a":[
-                    {"t":"Evet","to":2},
-                    {"t":"Hayır","r":[1,5]}
+                    {"t":"Yes","to":2},
+                    {"t":"No","r":[1,5]}
                 ]
         },
         {
             "id":2,
             "q":"Sorun yaşarsan biraz uğraşmak seni sıkar mı?",
             "a":[
-                    {"t":"Evet","r":[0,2]},
-                    {"t":"Hayır","r":[3,4]}
+                    {"t":"Yes","r":[0,2]},
+                    {"t":"No","r":[3,4]}
                 ]
         },
         {
             "id":3,
             "q":"Gizliliğine çok önem verir misin?",
             "a":[
-                    {"t":"Evet","to":4},
-                    {"t":"Hayır","r":[7]}
+                    {"t":"Yes","to":4},
+                    {"t":"No","r":[7]}
                 ]
         },
         {
             "id":4,
             "q":"Oyun odaklı bir sistemi tercih eder misin?",
             "a":[
-                    {"t":"Evet","r":[6]},
-                    {"t":"Hayır","r":[8]}
+                    {"t":"Yes","r":[6]},
+                    {"t":"No","r":[8]}
                 ]
         }
     ],
