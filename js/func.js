@@ -129,11 +129,17 @@ request.onload = function()
          }
          //let elemResult = document.createElement("ul");
          //elemResults.setAttribute("data-result",)
-
+         
+         // Aynı işi yapan eski kod
+         /*
          let elemReset = document.createElement("button");
          elemReset.setAttribute("id","reset");
          elemReset.textContent = jsonRespond.interface.apprestart;
          e.appendChild(elemReset);
+         */
+
+         // Aynı işi yapan yeni kod
+         let elemReset = newElement("button","main",jsonRespond.interface.apprestart,"id","reset");
 
          let resetbutton = document.querySelector("#reset");
          resetbutton.addEventListener("click", function(){
@@ -149,21 +155,33 @@ request.onload = function()
 ###### newElement() ###### UYARI: BU FONKSİYON HENÜZ TAMAMLANMADI
 ###### Verilen özelliklerde element oluşturur
 ###### param0: Element tipi
-###### param1: Elemente eklenecek HTML öğeleri
-###### param2: Yeni element hangi elementin içinde oluşturulacak?
+###### param1: Yeni element nerede oluşturulacak?
+###### param2: Elemente içeriği
 ###### param3: Element özelliği
 ###### param4: Özelliğin değeri
 */
-function newElement()
-{
-   if (arguments[0] && arguments[1] !== undefined)
-   {
-      let newElem = document.createElement(arguments[0]);
-      if (arguments[3] && arguments[4] !== undefined) {newElem.setAttribute(arguments[3],arguments[4]);}
-      else {}
+function newElement(eType, ePos, eCont, eAttr, eAttrVal)  {
+   if (eType && ePos !== undefined) {
+      
+      let newElem = document.createElement(eType);
+      
+      /*
+      let parType = [eType,ePos,eCont,eAttr,eAttrVal];
+      for (let i=0; i < parType.length; i++) {
+         console.log(parType[i]);
+         console.log(typeof(parType[i]));
+      }
+      */
 
-      newElem.innerHTML = arguments[1];
-      document.querySelector(arguments[2]).appendChild(newElem);
+      if (eCont !== undefined) {
+         newElem.textContent = eCont;
+      }
+      
+      if (eAttr && eAttrVal !== undefined) {
+         newElem.setAttribute(eAttr,eAttrVal);
+      }
+
+      document.querySelector(ePos).appendChild(newElem);
    }
-   else {console.log("Element oluşturulamadı!")}
+   else {console.log("Element oluşturulamadı! Eksik parametre.")}
 }
