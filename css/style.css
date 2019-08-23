@@ -39,28 +39,52 @@ body {
   overflow-x: hidden;
 }
 
-.fadeOut {
+.slideOut {
   position: relative;
-  animation-name: fadeOut;
+  animation-name: slideOut;
   animation-duration: 0.2s;
   animation-iteration-count: 1;
   animation-direction: normal;
 }
 
-@keyframes fadeOut {
+@keyframes slideOut {
   from {left: 0px}
   to {left: -20px; opacity: 0;}
 }
 
-.fadeIn {
+.slideIn {
   position: relative;
-  animation-name: fadeIn;
+  animation-name: slideIn;
   animation-duration: 0.3s;
   animation-iteration-count: 1;
   animation-direction: reverse;
 }
 
-@keyframes fadeIn {
+@keyframes slideIn {
   from {left: 0px}
   to {left: 20px; opacity: 0;}
+}
+
+.fadeIn {
+  animation-name: fadeIn;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0}
+  to {opacity: 1;}
+}
+
+.fadeOut {
+  animation-name: fadeOut;
+  animation-duration: 0.4s;
+  animation-iteration-count: 1;
+  animation-direction: reverse;
+}
+
+@keyframes fadeOut {
+  from {opacity: 0}
+  to {opacity: 1;}
 }

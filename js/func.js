@@ -1,10 +1,49 @@
-let userlang = "tr";
+// ###### BU KISIM TAMAMLANMADI - BAŞLANGIÇ ######
 
-// Json dosyasını istiyoruz
-const request = new XMLHttpRequest();
-request.responseType = 'json';
-request.open("GET","js/lang/"+userlang+".json");
-request.send();
+// Çerez yoksa oluştur
+if(document.cookie == "") {
+   // Varsayılan dil
+   document.cookie = "language = tr";
+   console.log("Varsayılan diliniz 'tr' olarak ayarlandı.");
+}
+// Çerezi oku
+let userlang = getCookie('language');
+
+// Çerezi değiştir
+function changeCookie(lang) {
+   document.cookie = `language = ${lang}`;
+   console.log("Aktif dil '" + getCookie('language') + "' olarak değiştirildi! Sayfayı Yenile.");
+}
+
+// Çerezi ayrıştır
+function getCookie(cname) {
+   var name = cname + "=";
+   var decodedCookie = decodeURIComponent(document.cookie);
+   var ca = decodedCookie.split(';');
+   for(var i = 0; i <ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == ' ') {
+         c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+         return c.substring(name.length, c.length);
+      }
+   }
+   return "";
+}
+
+console.log("Aktif dil: " + getCookie('language'));
+
+initializeUi();
+// ###### BU KISIM TAMAMLANMADI - BİTİŞ ######
+
+function initializeUi() {   
+   // Json dosyasını istiyoruz
+   const request = new XMLHttpRequest();
+   request.responseType = 'json';
+   request.open("GET","js/lang/"+userlang+".json");
+   request.send();
+   //location.reload();
 
 // Sonucu alıyoruz ve ekrana göstermek için fonksiyona yolluyoruz
 request.onload = function()
@@ -13,13 +52,19 @@ request.onload = function()
    let firstQuestion = 0; // Başlangıç sorusu
    let questionCount = 1; // Soru sayacı
    // Dil değişkenleri testi ##### Bunlar fonksiyona çevrilmeli #####
-   //console.log( Object.keys(jsonRespond.interface).length );
    document.querySelector(".pri-header h1").textContent = jsonRespond.interface.title;
    document.querySelector(".pri-header h2").textContent = jsonRespond.interface.subtitle;
    document.querySelector(".pri-header p").textContent = jsonRespond.interface.description;
    document.querySelector(".pri-footer").textContent = jsonRespond.interface.lang + jsonRespond.interface.activelang;
    
-   createQuestions(jsonRespond, firstQuestion);
+   // Uygulama başlangıç ekranı
+   newElement({eType : "section", ePos : ".pri-content", eAttr : [["class", "app-welcome fadeIn"]]});
+   newElement({eType : "p", ePos : ".app-welcome", eAttr : [["class", ".app-desciption"]], eCont : jsonRespond.interface.appdescription});
+   newElement({eType : "button", ePos : ".app-welcome", eCont : jsonRespond.interface.appstart});
+   document.querySelector(".app-welcome").addEventListener("click", function() {
+      this.remove();
+      createQuestions(jsonRespond, firstQuestion);
+   });
 
    // jsonObj .json dosyasını temsil ediyor
    function createQuestions(jsonObj, qID) {
@@ -62,7 +107,7 @@ request.onload = function()
          
       let elemQuestion = newElement({eType : "ul", ePos : ".pri-content", eAttr : [["data-question", qID]]});
       elemQuestion.innerHTML = "<b style='color:red'>" + questionCount + "</b> " + question(qID).q + "<br><br>";  
-      elemQuestion.className = "fadeIn";
+      elemQuestion.className = "slideIn";
                document.querySelector("[data-question]").addEventListener("animationend", function() {
          this.className = "";
       });
@@ -95,7 +140,7 @@ request.onload = function()
             // Geçici çözüm, daha iyi bir kontrol ile değiştirilebilir.
             if(document.querySelector("[data-question]").getAttribute("class") === "") {
                let e = document.querySelector("[data-question]");
-               e.className = "fadeOut";
+               e.className = "slideOut";
                e.addEventListener("animationend", function() {
                   e.remove(e[0]);
                   if(answerbutton[i].hasAttribute("data-go")) {
@@ -121,10 +166,10 @@ request.onload = function()
       // Sonuçları getirir
       function createResults() {
          let searchID = arguments[0].split(",");
-         let elemResultContainer = newElement({eType : "ul", ePos : ".pri-content", eAttr : [["id", "suggestions"], ["class", "fadeIn"]]});
+         let elemResultContainer = newElement({eType : "section", ePos : ".pri-content", eAttr : [["id", "suggestions"], ["class", "app-final slideIn"]], eCont : jsonRespond.interface.appresults});
          for (let i = 0; i < searchID.length; i++) {
             let results = jsonObj.results.find(result => { return result.id == searchID[i] });
-            let elemResultItem = newElement({eType : "li", ePos : "#suggestions", eAttr : [["data-result", searchID[i]]], eCont : results.s});   
+            let elemResultItem = newElement({eType : "article", ePos : "#suggestions", eAttr : [["data-result", searchID[i]]], eCont : results.s});   
          }
          
          let elemReset = newElement({eType : "button", ePos : "#suggestions", eAttr : [["id","reset"]], eCont : jsonRespond.interface.apprestart});
@@ -163,4 +208,6 @@ function newElement({eType, ePos, eCont, eAttr}) {
    else{
       console.log("Element oluşturulamadı! Eksik parametre.");
    }
+}
+
 }
