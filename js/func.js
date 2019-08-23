@@ -1,9 +1,9 @@
-var userlang = "tr";
+let userlang = "tr";
 
 // Json dosyasını istiyoruz
-var request = new XMLHttpRequest();
-request.open("GET","js/lang/"+userlang+".json");
+const request = new XMLHttpRequest();
 request.responseType = 'json';
+request.open("GET","js/lang/"+userlang+".json");
 request.send();
 
 // Sonucu alıyoruz ve ekrana göstermek için fonksiyona yolluyoruz
@@ -60,32 +60,26 @@ request.onload = function()
          return Object.keys( answer( question(a) ) ).length;
       };
          
-      // ### İleride newElement() fonksiyonu ile değiştirilecek ###
-      let elemQuestion = document.createElement("ul");
-      elemQuestion.setAttribute("data-question", qID);
+      let elemQuestion = newElement({eType : "ul", ePos : ".pri-content", eAttr : [["data-question", qID]]});
       elemQuestion.innerHTML = "<b style='color:red'>" + questionCount + "</b> " + question(qID).q + "<br><br>";  
-      document.querySelector("main").appendChild(elemQuestion);
       elemQuestion.className = "fadeIn";
+               document.querySelector("[data-question]").addEventListener("animationend", function() {
+         this.className = "";
+      });
 
       // Soruya ait cevapların adetini hesaplar ve elementleri oluşturur
-      for (let answerCount = 0; answerCount < answerLength(qID) ; answerCount++) {
-         // ### İleride newElement() fonksiyonu ile değiştirilecek ###
-         var elemAnswer = document.createElement("li");
-         elemAnswer.setAttribute("data-answer", answerCount);
-         elemAnswer.innerHTML = answer(question(qID),answerCount).t;
-         questionOrResult(answer(question(qID),answerCount));   
-         document.querySelector("ul:last-child").appendChild(elemAnswer);
+      for(let answerCount = 0; answerCount < answerLength(qID) ; answerCount++) {
+         var elemAnswer = newElement({eType : "li", ePos : "[data-question]", eAttr : [["data-answer", answerCount]], eCont: answer(question(qID),answerCount).t});
+         questionOrResult(answer(question(qID),answerCount));
       }
-
+      
       // Seçeneği başka bir soru veya sonuç olarak ayarlar
       function questionOrResult() {
-         if ( arguments[0].hasOwnProperty("to") )
-         {
+         if( arguments[0].hasOwnProperty("to") ) {
             elemAnswer.setAttribute("data-go", arguments[0].to);
-         } else {
+         } else{
             let dataStop = "";
-            for (let resultCount = 0; resultCount < arguments[0].r.length; resultCount++)
-            {
+            for(let resultCount = 0; resultCount < arguments[0].r.length; resultCount++) {
                dataStop += arguments[0].r[resultCount] + " ";
             }
             elemAnswer.setAttribute("data-stop", dataStop.split(" ",arguments[0].r.length));
@@ -94,49 +88,48 @@ request.onload = function()
 
       // Seçeneklere tıklama olayını yakalar
       let answerbutton = document.querySelectorAll("[data-answer]");
-      for (let i = 0; i < answerbutton.length; i++)
+      for(let i = 0; i < answerbutton.length; i++)
       {
-         answerbutton[i].addEventListener("click", function(){
-            let e = document.querySelector("[data-question]");
-            // CSS3 olay yakalama testi. Başarılı olursam bunu arayüzdeki aksiyonlara entegre edeceğim.
-            e.className = "fadeOut";
-            e.addEventListener("animationend", function(){
-               e.remove(e[0]);
-               if (answerbutton[i].hasAttribute("data-go")) {
-                  questionCount += 1;
-                  createQuestions(jsonRespond,Number( answerbutton[i].getAttribute("data-go") ));
-               }
-               else if (answerbutton[i].hasAttribute("data-stop")) {
-                  questionCount += 1;
-                  createResults(answerbutton[i].getAttribute("data-stop"));
-               }
-               else {
-                  // Geçersiz veri varsa aynı soruyu döndür.
-                  createQuestions(jsonRespond,Number( e.getAttribute("data-question") ));
-                  console.log("Geçerli bir seçenek değil!");
-               }
-            });
+         answerbutton[i].addEventListener("click", function() {
+            // Animasyonlar tamamlanmadan elemente peşpeşe tıklandığında gereğinden fazla soru oluşturmaması için gereken kontrol.
+            // Geçici çözüm, daha iyi bir kontrol ile değiştirilebilir.
+            if(document.querySelector("[data-question]").getAttribute("class") === "") {
+               let e = document.querySelector("[data-question]");
+               e.className = "fadeOut";
+               e.addEventListener("animationend", function() {
+                  e.remove(e[0]);
+                  if(answerbutton[i].hasAttribute("data-go")) {
+                     questionCount += 1;
+                     createQuestions(jsonRespond, Number(answerbutton[i].getAttribute("data-go")));
+                  }
+                  else if(answerbutton[i].hasAttribute("data-stop")) {
+                     questionCount += 1;
+                     createResults(answerbutton[i].getAttribute("data-stop"));
+                  }
+                  else{
+                     // Geçersiz veri varsa aynı soruyu döndür.
+                     createQuestions(jsonRespond, Number(e.getAttribute("data-question")));
+                     console.log("Geçerli bir seçenek değil!");
+                  }
+               })
+            } else{
+               console.log("Animasyon bitmedi!");
+            }
          });
       }
 
       // Sonuçları getirir
       function createResults() {
-         let e = document.querySelector("main");
-         searchID = arguments[0].split(",");
-
-         elemResultContainer = newElement("ul","main",undefined,"id","suggestions");
-         elemResultContainer.className = "fadeIn";
-         
+         let searchID = arguments[0].split(",");
+         let elemResultContainer = newElement({eType : "ul", ePos : ".pri-content", eAttr : [["id", "suggestions"], ["class", "fadeIn"]]});
          for (let i = 0; i < searchID.length; i++) {
-            let results = jsonObj.results.find(result => { return result.id == searchID[i] });  
-            //e.innerHTML += searchID[i] + "-" + results.s + "<br>";
-            elemResult = newElement("li","#suggestions",results.s,"data-result",searchID[i]);
+            let results = jsonObj.results.find(result => { return result.id == searchID[i] });
+            let elemResultItem = newElement({eType : "li", ePos : "#suggestions", eAttr : [["data-result", searchID[i]]], eCont : results.s});   
          }
          
-         let elemReset = newElement("button","#suggestions",jsonRespond.interface.apprestart,"id","reset");
-         let resetbutton = document.querySelector("#reset");
-         resetbutton.addEventListener("click", function(){
-            e.innerHTML = "";
+         let elemReset = newElement({eType : "button", ePos : "#suggestions", eAttr : [["id","reset"]], eCont : jsonRespond.interface.apprestart});
+         document.querySelector("#reset").addEventListener("click", function() {
+            document.querySelector("main").innerHTML = "";
             questionCount = 1;
             createQuestions(jsonRespond, firstQuestion);
          });
@@ -150,31 +143,24 @@ request.onload = function()
 ###### param0: Element tipi
 ###### param1: Yeni element nerede oluşturulacak?
 ###### param2: Elemente içeriği
-###### param3: Element özelliği
-###### param4: Özelliğin değeri
+###### param3: Element özelliği ve değeri
 */
-function newElement(eType, ePos, eCont, eAttr, eAttrVal)  {
-   if (eType && ePos !== undefined) {
-      
+function newElement({eType, ePos, eCont, eAttr}) {
+   if(eType && ePos !== undefined) {
       let newElem = document.createElement(eType);
-      
-      /*
-      let parType = [eType,ePos,eCont,eAttr,eAttrVal];
-      for (let i=0; i < parType.length; i++) {
-         console.log(parType[i]);
-         console.log(typeof(parType[i]));
-      }
-      */
-
-      if (eCont !== undefined) {
+      if(eCont !== undefined) {
          newElem.textContent = eCont;
       }
       
-      if (eAttr && eAttrVal !== undefined) {
-         newElem.setAttribute(eAttr,eAttrVal);
+      if(eAttr !== undefined) {
+         eAttr.forEach(item => {
+            newElem.setAttribute(item[0], item[1]);
+         });
       }
 
       return document.querySelector(ePos).appendChild(newElem);
    }
-   else {console.log("Element oluşturulamadı! Eksik parametre.")}
+   else{
+      console.log("Element oluşturulamadı! Eksik parametre.");
+   }
 }
