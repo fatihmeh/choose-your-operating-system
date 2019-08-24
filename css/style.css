@@ -39,6 +39,10 @@ body {
   overflow-x: hidden;
 }
 
+.pri-footer {
+  padding: 10px;
+}
+
 .slideOut {
   position: relative;
   animation-name: slideOut;

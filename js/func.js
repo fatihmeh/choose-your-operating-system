@@ -8,11 +8,13 @@ if(document.cookie == "") {
 }
 // Çerezi oku
 let userlang = getCookie('language');
+//let userlang = "demo";
 
 // Çerezi değiştir
 function changeCookie(lang) {
    document.cookie = `language = ${lang}`;
    console.log("Aktif dil '" + getCookie('language') + "' olarak değiştirildi! Sayfayı Yenile.");
+   location.reload();
 }
 
 // Çerezi ayrıştır
@@ -43,7 +45,6 @@ function initializeUi() {
    request.responseType = 'json';
    request.open("GET","js/lang/"+userlang+".json");
    request.send();
-   //location.reload();
 
 // Sonucu alıyoruz ve ekrana göstermek için fonksiyona yolluyoruz
 request.onload = function()
@@ -55,7 +56,6 @@ request.onload = function()
    document.querySelector(".pri-header h1").textContent = jsonRespond.interface.title;
    document.querySelector(".pri-header h2").textContent = jsonRespond.interface.subtitle;
    document.querySelector(".pri-header p").textContent = jsonRespond.interface.description;
-   document.querySelector(".pri-footer").textContent = jsonRespond.interface.lang + jsonRespond.interface.activelang;
    
    // Uygulama başlangıç ekranı
    newElement({eType : "section", ePos : ".pri-content", eAttr : [["class", "app-welcome fadeIn"]]});
@@ -65,6 +65,22 @@ request.onload = function()
       this.remove();
       createQuestions(jsonRespond, firstQuestion);
    });
+   
+   // Dil değiştirici
+   newElement({eType : "label", ePos : ".pri-footer", eAttr : [["for", "language-changer"]], eCont : jsonRespond.interface.lang});
+   let elemLang = newElement({eType : "select", ePos : ".pri-footer", eAttr : [["id", "language-changer"]]});
+   elemLang.innerHTML = `
+      <option value='${getCookie("language")}'>(${jsonRespond.interface.activelang})</option>
+      <option value='tr'>Türkçe</option>
+      <option value='en'>English</option>
+      <option value='demo'>Lorem</option>
+   `;
+
+   document.querySelector("#language-changer").addEventListener("change", function() {
+      changeCookie(this.value);
+      //this.options[this.selectedIndex].text;
+      //this.value;
+   })
 
    // jsonObj .json dosyasını temsil ediyor
    function createQuestions(jsonObj, qID) {
