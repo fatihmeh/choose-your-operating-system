@@ -9,7 +9,9 @@
         "appdescription":"Soruları tercihlerinize göre yanıtlayın. Hazır mısın?",
         "appstart":"Başla",
         "appresults":"Tebrikler, bitirdiniz!",
-        "apprestart":"Başa Dön"
+        "apprestart":"Başa Dön",
+        "appErrorOrigin":"Menşe bilinmiyor",
+        "appErrorDescription":"Bilgi bulunamadı"
     },
     "questions":
     [
@@ -56,15 +58,77 @@
     ],
     "results":
     [
-        {"id":0,"s":"Solus"},
-        {"id":1,"s":"Mint"},
-        {"id":2,"s":"Manjaro"},
-        {"id":3,"s":"Arch"},
-        {"id":4,"s":"Gentoo"},
-        {"id":5,"s":"Fedora"},
-        {"id":6,"s":"Windows 7"},
-        {"id":7,"s":"Windows 10"},
-        {"id":8,"s":"macOS"}
+        {
+            "id":0,
+            "s":"Solus",
+            "h":"https://getsol.us/",
+            "rd":"2016",
+            "o":"İrlanda",
+            "d":"Sıfırdan geliştirilmiş bir Linux dağıtımıdır. Kendi geliştirdikleri Budgie masaüstü ortamını kullanır."
+        },
+        {
+            "id":1,
+            "s":"Mint",
+            "h":"https://linuxmint.com/",
+            "rd":"2006",
+            "o":"İrlanda",
+            "d":"Ubuntu tabanlı bir Linux dağıtımıdır. Varsayılan haliyle klasik bir masaüstü deneyimini hedefler."
+        },
+        {
+            "id":2,
+            "s":"Manjaro",
+            "h":"https://manjaro.org/",
+            "rd":"2013",
+            "o":"Avusturya, Almanya, Fransa",
+            "d":"Arch tabanlı bir Linux dağıtımıdır. Kullanıcı dostu ve hızlıdır."
+        },
+        {
+            "id":3,
+            "s":"Arch",
+            "h":"https://archlinux.org/",
+            "rd":"2002",
+            "o":"Kanada",
+            "d":"Bağımsız geliştirilmiştir. Yetkin Linux kullanıcılarını hedefler. Varsayılan kurulum sadece temel bileşenleri barındırır."
+        },
+        {
+            "id":4,
+            "s":"Gentoo",
+            "h":"https://gentoo.org/",
+            "rd":"2002",
+            "o":"ABD",
+            "d":"Bağımsız geliştirilmiştir. Hızlı ve çok yönlüdür. Geliştiricileri ve ağ uzmanlarını hedefler."
+        },
+        {
+            "id":5,
+            "s":"Fedora",
+            "h":"https://getfedora.org/",
+            "rd":"2003",
+            "o":"ABD",
+            "d":"Bağımsız geliştirilmiştir. Red Hat ve topluluk tarafından desteklenir."
+        },
+        {
+            "id":6,
+            "s":"Windows 7",
+            "h":"https://microsoft.com/software-download/windows7",
+            "rd":"2009",
+            "o":"ABD",
+            "d":"Microsoft tarafından kişisel bilgisayarlar için geliştirilmiştir. Geniş kullanım ihtiyaçlarını karşılar. Desteği kesilmiştir."
+        },
+        {
+            "id":7,
+            "s":"Windows 10",
+            "h":"https://microsoft.com/windows/",
+            "rd":"2014",
+            "o":"ABD",
+            "d":"Microsoft tarafından kişisel bilgisayarlar için geliştirilmiştir. Geniş kullanım ihtiyaçlarını karşılar."
+        },
+        {
+            "id":8,
+            "s":"macOS",
+            "h":"https://apple.com/macos/",
+            "rd":"2001",
+            "o":"ABD",
+            "d":"Apple tarafından Mac bilgisayarlar için geliştirilmiştir. Stabil olması, medya üretimi ve arayüzü ile öne çıkar."
+        }
     ]
-    
 }

@@ -9,7 +9,9 @@
         "appdescription":"Ipsum dolor sit amet, consectetur adipiscing elit.",
         "appstart":"Stagter",
         "appresults":"Congratelas, yura dan!",
-        "apprestart":"Retun tu Stagter"
+        "apprestart":"Retun tu Stagter",
+        "appErrorOrigin":"Orijun unukov",
+        "appErrorDescription":"Dinut fud infuk"
     },
     "questions":
     [
@@ -49,5 +51,4 @@
         {"id":3,"s":"Massa"},
         {"id":4,"s":"Nunc"}
     ]
-    
 }

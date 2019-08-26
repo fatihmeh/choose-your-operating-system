@@ -47,6 +47,7 @@ const initializeUI = () => {
       document.querySelector('.pri-header h1').textContent = uiLang.title;
       document.querySelector('.pri-header h2').textContent = uiLang.subtitle;
       document.querySelector('.pri-header p').textContent = uiLang.description;
+      document.querySelector('.pri-footer p').textContent = `${uiLang.devs}`;
       
       // Uygulama başlangıç ekranı
       newElement({eType : 'section', ePos : '.pri-content', eAttr : [['class', 'app-welcome fadeIn']]});
@@ -177,7 +178,16 @@ const initializeUI = () => {
                let results = jsonObj.results.find(result => {
                   return result.id === Number(searchID[i]);
                });
-               newElement({eType : 'article', ePos : '#suggestions', eAttr : [['data-result', searchID[i]]], eCont : results.s});   
+               const elemResult = newElement({eType : 'article', ePos : '#suggestions', eAttr : [['data-result', searchID[i]]]});
+               elemResult.innerHTML = `
+               <header>
+                  <h3>
+                     <a href='${results.h ? results.h : results.h = '#'}' target='_blank'>${results.s}</a>
+                  </h3>
+                  </header>
+               <p>${results.rd ? results.rd + ' - ' : results.rd = ''}${results.o ? results.o : results.o = uiLang.appErrorOrigin}</p>
+               <p>${results.d ? results.d : results.o = uiLang.appErrorDescription}</p>
+               `;
             }
 
             // Başa dön
