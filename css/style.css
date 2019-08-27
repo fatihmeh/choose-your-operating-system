@@ -7,21 +7,92 @@
   -Yerleşim
   -...
 */
-[data-question], #suggestions {
-  list-style: none;
+html, body {
+  height: 100%;
 }
 
-[data-answer] {
-  width: 200px;
-  margin: 2px;
-  padding: 12px;
-  border: 1px solid gray;
-  border-radius: 4px;
-  cursor: pointer;
-  user-select: none;
+html {
+  font-size: 62.5%;
 }
-[data-answer]:hover {
-  background: #e0e0e0
+
+body {
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  display: grid;
+  grid-template-areas: 
+    'a a a'
+    '. b .'
+    'c c c';
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: normal;
+}
+
+.pri-header hgroup {
+  color: #dcdcdc;
+}
+
+.pri-header p {
+  font-style: italic;
+}
+.pri-header p::before, .pri-header p::after {
+  content: "\"";
+}
+.pri-header {
+  grid-area: a;
+  font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+  align-self: start;
+  justify-self: stretch;
+  text-align: center;
+  color: #fff;
+  background: rgb(202,0,75);
+  background: linear-gradient(0deg, rgba(59,59,59,1) 0%, rgba(37,37,37,1) 35%, rgba(15,15,15,1) 100%);
+  
+}
+
+.pri-content {
+  grid-area: b;
+  align-self: start;
+  justify-self: stretch;
+  text-align: center;
+}
+
+.pri-footer {
+  grid-area: c;
+  align-self: end;
+  display: flex;
+  align-items: baseline;
+  padding: 2rem;
+  font-size: 1.4rem;
+}
+
+.app-welcome {
+  font-size: 2.4rem;
+}
+
+.pri-footer section {
+  width: 100%;
+  color: #ababab;
+}
+
+#version {
+  text-align: left;
+}
+
+#developers {
+  text-align: center;
+}
+
+#locale {
+  text-align: right;
 }
 
 [data-result] {
@@ -33,14 +104,6 @@
   background: rgb(0, 140, 255);
   text-align: center;
   color: white;
-}
-
-body {
-  overflow-x: hidden;
-}
-
-.pri-footer {
-  padding: 10px;
 }
 
 .slideOut {
@@ -91,4 +154,59 @@ body {
 @keyframes fadeOut {
   from {opacity: 0}
   to {opacity: 1;}
+}
+
+.button-style1 {
+  min-width: 20rem;
+  max-width: 40rem;
+  padding: 1.6rem 1.2rem;
+  font-size: 2rem;
+  background: #fff;
+  color: #00d581;
+  border: 1px solid #00d581;
+  border-radius: 3rem;
+  cursor: pointer;
+  transition: 0.15s;
+  font-weight: bold;
+}
+
+.button-style1:hover {
+  background: #00d581;
+  color: #fff;
+}
+
+.button-style2 {
+  min-width: 20rem;
+  max-width: 50rem;
+  margin: 2px;
+  padding: 0.8rem 1.2erm;
+  background: #f5f5f5;
+  color: rgb(0, 0, 0);
+  border: none;
+  border-radius: 0.4em;
+  cursor: pointer;
+  transition: 0.15s;
+}
+
+.button-style2:hover {
+  background: #ebebeb;
+}
+
+.button-style3 {
+  min-width: 20rem;
+  max-width: 40rem;
+  padding: 1.6rem 1.2rem;
+  font-size: 2rem;
+  background: #fff;
+  color: #d52000;
+  border: 1px solid #d52000;
+  border-radius: 3rem;
+  cursor: pointer;
+  transition: 0.15s;
+  font-weight: bold;
+}
+
+.button-style3:hover {
+  background: #d52000;
+  color: #fff;
 }

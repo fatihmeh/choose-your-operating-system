@@ -47,20 +47,21 @@ const initializeUI = () => {
       document.querySelector('.pri-header h1').textContent = uiLang.title;
       document.querySelector('.pri-header h2').textContent = uiLang.subtitle;
       document.querySelector('.pri-header p').textContent = uiLang.description;
-      document.querySelector('.pri-footer p').textContent = `${uiLang.devs}`;
+      document.querySelector('#version').textContent = `beta2019-6390e81`;
+      document.querySelector('#developers').textContent = `${uiLang.devs}`;
       
       // Uygulama başlangıç ekranı
       newElement({eType : 'section', ePos : '.pri-content', eAttr : [['class', 'app-welcome fadeIn']]});
       newElement({eType : 'p', ePos : '.app-welcome', eAttr : [['class', '.app-desciption']], eCont : uiLang.appdescription});
-      newElement({eType : 'button', ePos : '.app-welcome', eCont : uiLang.appstart});
+      newElement({eType : 'button', ePos : '.app-welcome', eAttr : [['class', 'button-style1']], eCont : uiLang.appstart});
       document.querySelector('.app-welcome').addEventListener('click', function() {
          this.remove();
          createQuestions(jsonRespond, firstQuestion);
       });
       
       // Dil değiştirici
-      newElement({eType : 'label', ePos : '.pri-footer', eAttr : [['for', 'language-changer']], eCont : uiLang.lang});
-      const elemLang = newElement({eType : 'select', ePos : '.pri-footer', eAttr : [['id', 'language-changer']]});
+      newElement({eType : 'label', ePos : '#locale', eAttr : [['for', 'language-changer']], eCont : uiLang.lang});
+      const elemLang = newElement({eType : 'select', ePos : '#locale', eAttr : [['id', 'language-changer']]});
       elemLang.innerHTML = `
          <option value='${getCookie('language')}'>(${uiLang.activelang})</option>
          <option value='tr'>Türkçe</option>
@@ -127,7 +128,7 @@ const initializeUI = () => {
          // Soruya ait cevapların adetini hesaplar ve elementleri oluşturur
          let elemAnswer;
          for (let answerCount = 0; answerCount < answerLength(qID) ; answerCount++) {
-            elemAnswer = newElement({eType : 'button', ePos : '[data-question]', eAttr : [['data-answer', answerCount]], eCont: answer(question(qID),answerCount).t});
+            elemAnswer = newElement({eType : 'button', ePos : '[data-question]', eAttr : [['data-answer', answerCount], ['class', 'button-style2']], eCont: answer(question(qID),answerCount).t});
             questionOrResult(answer(question(qID),answerCount));
          }
          
@@ -196,7 +197,7 @@ const initializeUI = () => {
             }
 
             // Başa dön
-            const elemReset = newElement({eType : 'button', ePos : '#suggestions', eAttr : [['id','reset']], eCont : uiLang.apprestart});
+            const elemReset = newElement({eType : 'button', ePos : '#suggestions', eAttr : [['id','reset'], ['class', 'button-style3']], eCont : uiLang.apprestart});
             document.querySelector('#reset').addEventListener('click', function() {
                document.querySelector('main').innerHTML = '';
                questionCount = 1;
