@@ -111,8 +111,13 @@ const initializeUI = () => {
            return Object.keys(answer(question(a))).length;
          };
          
-         const elemQuestion = newElement({eType : 'ul', ePos : '.pri-content', eAttr : [['data-question', qID]]});
-         elemQuestion.innerHTML = `<b style='color:red'> ${questionCount} </b> ${question(qID).q} <br><br>`;
+         const elemQuestion = newElement({eType : 'article', ePos : '.pri-content', eAttr : [['data-question', qID]]});
+         elemQuestion.innerHTML = `
+            <header>
+               <span># ${questionCount}</span><p>${question(qID).q}</p>
+            </header> 
+            
+         `;
          elemQuestion.className = 'slideIn';
 
          document.querySelector('[data-question]').addEventListener('animationend', function() {
@@ -122,7 +127,7 @@ const initializeUI = () => {
          // Soruya ait cevapların adetini hesaplar ve elementleri oluşturur
          let elemAnswer;
          for (let answerCount = 0; answerCount < answerLength(qID) ; answerCount++) {
-            elemAnswer = newElement({eType : 'li', ePos : '[data-question]', eAttr : [['data-answer', answerCount]], eCont: answer(question(qID),answerCount).t});
+            elemAnswer = newElement({eType : 'button', ePos : '[data-question]', eAttr : [['data-answer', answerCount]], eCont: answer(question(qID),answerCount).t});
             questionOrResult(answer(question(qID),answerCount));
          }
          
