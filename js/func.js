@@ -44,6 +44,7 @@ const initializeUI = () => {
       const firstQuestion = 0;
       let questionCount = 1;
       
+      document.title = uiLang.title;
       document.querySelector('.pri-header h1').textContent = uiLang.title;
       document.querySelector('.pri-header h2').textContent = uiLang.subtitle;
       document.querySelector('.pri-header p').textContent = uiLang.description;
