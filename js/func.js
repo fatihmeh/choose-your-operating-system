@@ -51,17 +51,17 @@ const initializeUI = () => {
       document.querySelector('#developers').textContent = `${uiLang.devs}`;
       
       // Uygulama başlangıç ekranı
-      newElement({eType : 'section', ePos : '.pri-content', eAttr : [['class', 'app-welcome fadeIn']]});
+      const elemStart = newElement({eType : 'section', ePos : '.pri-content', eAttr : [['class', 'app-welcome fadeIn']]});
       newElement({eType : 'p', ePos : '.app-welcome', eAttr : [['class', '.app-desciption']], eCont : uiLang.appdescription});
       newElement({eType : 'button', ePos : '.app-welcome', eAttr : [['class', 'button-style1']], eCont : uiLang.appstart});
-      document.querySelector('.app-welcome').addEventListener('click', function() {
-         this.remove();
+      document.querySelector('.button-style1').addEventListener('click', function() {
+         elemStart.remove();
          createQuestions(jsonRespond, firstQuestion);
       });
       
       // Dil değiştirici
       newElement({eType : 'label', ePos : '#locale', eAttr : [['for', 'language-changer']], eCont : uiLang.lang});
-      const elemLang = newElement({eType : 'select', ePos : '#locale', eAttr : [['id', 'language-changer']]});
+      const elemLang = newElement({eType : 'select', ePos : '#locale', eAttr : [['id', 'language-changer'], ['class', 'select-style']]});
       elemLang.innerHTML = `
          <option value='${getCookie('language')}'>(${uiLang.activelang})</option>
          <option value='tr'>Türkçe</option>

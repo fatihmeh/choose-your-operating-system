@@ -1,12 +1,28 @@
-/* Ekstra stiller */
-
 /* 
-/// İçerik Tablosu ///
-  -Sıfırlama
-  -Linkler
-  -Yerleşim
-  -...
+  - BASIC
+  - HEADER
+  - CONTENT
+  - FOOTER
+  - ANIMATIONS
+  - CONTROLS
+  - MEDIA QUERIES
 */
+
+/* BASIC */
+:root {
+  --body: #fff;
+  --header: linear-gradient(0deg, rgba(59,59,59,1) 0%, rgba(37,37,37,1) 35%, rgba(15,15,15,1) 100%);
+  --textwhite: #fff;
+  --textblack: #000;
+  --textgray: #ababab;
+  --textgray2: #888;
+  --button1: #00d581;
+  --button2: #ebebeb;
+  --button3: #db0054;
+  --select: #0043d5;
+  --select-active: #eee;
+}
+
 html, body {
   height: 100%;
 }
@@ -27,17 +43,28 @@ body {
     'c c c';
 }
 
-h1 {
-  font-size: 3rem;
-}
-
-h2 {
-  font-size: 2rem;
-  font-weight: normal;
+/* FOOTER */
+.pri-header {
+  grid-area: a;
+  font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+  align-self: start;
+  justify-self: stretch;
+  text-align: center;
+  color: var(--textwhite);
+  background: var(--header); 
 }
 
 .pri-header hgroup {
-  color: #dcdcdc;
+  color: var(--textgray);
+}
+
+.pri-header h1 {
+  font-size: 3rem;
+}
+
+.pri-header h2 {
+  font-size: 2rem;
+  font-weight: normal;
 }
 
 .pri-header p {
@@ -46,18 +73,8 @@ h2 {
 .pri-header p::before, .pri-header p::after {
   content: "\"";
 }
-.pri-header {
-  grid-area: a;
-  font-family: 'Montserrat', Arial, Helvetica, sans-serif;
-  align-self: start;
-  justify-self: stretch;
-  text-align: center;
-  color: #fff;
-  background: rgb(202,0,75);
-  background: linear-gradient(0deg, rgba(59,59,59,1) 0%, rgba(37,37,37,1) 35%, rgba(15,15,15,1) 100%);
-  
-}
 
+/* CONTENT */
 .pri-content {
   grid-area: b;
   align-self: start;
@@ -65,22 +82,24 @@ h2 {
   text-align: center;
 }
 
-.pri-footer {
-  grid-area: c;
-  align-self: end;
-  display: flex;
-  align-items: baseline;
-  padding: 2rem;
-  font-size: 1.4rem;
-}
-
 .app-welcome {
   font-size: 2.4rem;
 }
 
+/* FOOTER */
+.pri-footer {
+  grid-area: c;
+  align-self: end;
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  padding: 2rem;
+  color: var(--textgray);
+  font-size: 1.4rem;
+}
+
 .pri-footer section {
   width: 100%;
-  color: #ababab;
 }
 
 #version {
@@ -95,6 +114,10 @@ h2 {
   text-align: right;
 }
 
+#locale label {
+  margin-right: 0.8rem;
+}
+
 [data-result] {
   width: 200px;
   margin: 2px;
@@ -106,6 +129,7 @@ h2 {
   color: white;
 }
 
+/* ANIMATINONS */
 .slideOut {
   position: relative;
   animation-name: slideOut;
@@ -156,57 +180,100 @@ h2 {
   to {opacity: 1;}
 }
 
+/* CONTROLS */
+button:focus, select:focus {
+  outline: none;
+}
+
+.button-style1, .button-style2, .button-style3 {
+  position: relative;
+  top: 0;
+}
+
+.button-style1:active, .button-style2:active, .button-style3:active {
+  top: 0.6rem;
+  /*box-shadow: 0 0 0.4rem var(--textgray);*/
+}
+
+.button-style1, .button-style2, .button-style3, .select-style {
+  background: none;
+  font-weight: bold;
+  transition: 0.15s;
+  cursor: pointer;
+}
+
 .button-style1 {
   min-width: 20rem;
   max-width: 40rem;
   padding: 1.6rem 1.2rem;
-  font-size: 2rem;
-  background: #fff;
-  color: #00d581;
-  border: 1px solid #00d581;
+  border: 0.1rem solid var(--button1);
   border-radius: 3rem;
-  cursor: pointer;
-  transition: 0.15s;
-  font-weight: bold;
+  color: var(--button1);
+  font-size: 2rem;
 }
 
-.button-style1:hover {
-  background: #00d581;
-  color: #fff;
+.button-style1:hover, .button-style1:focus {
+  background: var(--button1);
+  color: var(--textwhite);
 }
 
 .button-style2 {
   min-width: 20rem;
   max-width: 50rem;
   margin: 2px;
-  padding: 0.8rem 1.2erm;
-  background: #f5f5f5;
-  color: rgb(0, 0, 0);
-  border: none;
+  padding: 1.8rem 2rem;
+  border: 0.1rem solid var(--button2);
   border-radius: 0.4em;
-  cursor: pointer;
-  transition: 0.15s;
+  color: var(--textgray);
 }
 
-.button-style2:hover {
-  background: #ebebeb;
+.button-style2:hover, .button-style2:focus {
+  background: var(--button2);
+  color: var(--textgray2);
 }
 
 .button-style3 {
-  min-width: 20rem;
-  max-width: 40rem;
-  padding: 1.6rem 1.2rem;
-  font-size: 2rem;
-  background: #fff;
-  color: #d52000;
-  border: 1px solid #d52000;
+  padding: 0.8rem 1.6rem;
+  border: 0.1rem solid var(--button3);
   border-radius: 3rem;
-  cursor: pointer;
-  transition: 0.15s;
-  font-weight: bold;
+  color: var(--button3);
+  font-size: 1.4rem;
 }
 
-.button-style3:hover {
-  background: #d52000;
-  color: #fff;
+.button-style3:hover, .button-style3:focus {
+  background: var(--button3);
+  color: var(--textwhite);
+}
+
+.select-style {
+  padding: 0.4rem 1.2rem;
+  border: none;
+  border-bottom: 0.2rem solid transparent;
+  color: var(--select);
+  -webkit-appearance: none;
+}
+
+.select-style:hover, .select-style:focus {
+  border-color: var(--select);
+}
+
+.select-style:active {
+  background: var(--select-active);
+}
+
+/* MEDIA QUERIES */
+@media (max-width: 767px) {
+  body {
+    grid-template-areas: 
+    'a'
+    'b'
+    'c';
+  }
+  .pri-footer {
+    flex-direction: column;
+  }
+  .pri-footer section {
+
+    text-align: center !important;
+  }
 }
