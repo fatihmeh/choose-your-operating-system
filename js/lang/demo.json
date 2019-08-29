@@ -1,0 +1,54 @@
+{
+    "interface":{
+        "title":"Mani Tito",
+        "subtitle":"Subtito",
+        "description":"Infuk",
+        "devs":"Develoccas:",
+        "lang":"Lingua:",
+        "activelang":"Lorem",
+        "appdescription":"Ipsum dolor sit amet, consectetur adipiscing elit.",
+        "appstart":"Stagter",
+        "appresults":"Congratelas, yura dan!",
+        "apprestart":"Retun tu Stagter",
+        "appErrorOrigin":"Orijun unukov",
+        "appErrorDescription":"Dinut fud infuk"
+    },
+    "questions":
+    [
+        {
+            "id":0,
+            "q":"Sed at pellentesque nibh?",
+            "a":[
+                    {"t":"Donec at purus id ex efficitur placerat","to":1},
+                    {"t":"Nulla nec felis sed nisi venenatis vulputate","to":2},
+                    {"t":"Cras pulvinar justo","to":2},
+                    {"t":"Cras eget tortor ac","to":2},
+                    {"t":"Etiam at","to":2}
+                ]
+        },
+        {
+            "id":1,
+            "q":"Fusce volutpat feugiat faucibus?",
+            "a":[
+                    {"t":"Integer fermentum justo vel tellus volutpat","to":2},
+                    {"t":"Praesent placerat metus","r":[0,1]}
+                ]
+        },
+        {
+            "id":2,
+            "q":"Anean sit amet purus lacinia tortor cursus aliquam?",
+            "a":[
+                    {"t":"Ut tristique turpis nec","to":1},
+                    {"t":"Vivamus eget nunc","r":[2,3,4]}
+                ]
+        }
+    ],
+    "results":
+    [
+        {"id":0,"s":"Duis"},
+        {"id":1,"s":"Justo"},
+        {"id":2,"s":"Orci"},
+        {"id":3,"s":"Massa"},
+        {"id":4,"s":"Nunc"}
+    ]
+}

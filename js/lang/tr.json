@@ -1,75 +1,134 @@
 {
-    "interface":[],
-    "questions":[
+    "interface":{
+        "title":"İşletim Sistemini Seç",
+        "subtitle":"Etkileşimli bir web arayüzü...",
+        "description":"Önerilerimize göz atın ve sizin için en uygun işletim sistemine karar verin.",
+        "devs":"Geliştiriciler:",
+        "lang":"Dil:",
+        "activelang":"Türkçe",
+        "appdescription":"Soruları tercihlerinize göre yanıtlayın. Hazır mısın?",
+        "appstart":"Başla",
+        "appresults":"Tebrikler, bitirdiniz!",
+        "apprestart":"Başa Dön",
+        "appErrorOrigin":"Menşe bilinmiyor",
+        "appErrorDescription":"Bilgi bulunamadı"
+    },
+    "questions":
+    [
         {
-            "id":"0",
+            "id":0,
             "q":"Ücretsiz bir sistem mi istersin?",
             "a":[
-                    {"t":"Evet","to":"1"},
-                    {"t":"Hayır","to":"3"},
-                    {"t":"Ekstra Seçenek","to":"1071"},
-                    {"t":"Ultra Seçenek","to":"1453"},
-                    {"t":"Mega Seçenek","to":"1923"},
-                    {"t":"Hiper Seçenek","to":"2023"},
-                    {"t":"Ultra Mega Kekstra Popkek Topkek Seçenek","to":"2071"}
+                    {"t":"Evet","to":1},
+                    {"t":"Hayır","to":3}
                 ]
         },
         {
-            "id":"1",
+            "id":1,
             "q":"Sık sık güncelleme ister misin?",
             "a":[
-                    {"t":"Nevet","to":"2"},
-                    {"t":"Nayır","r":["1","5"]}
+                    {"t":"Evet","to":2},
+                    {"t":"Hayır","r":[1,5]}
                 ]
         },
         {
-            "id":"2",
+            "id":2,
             "q":"Sorun yaşarsan biraz uğraşmak seni sıkar mı?",
             "a":[
-                    {"t":"Nevet","r":["0","2"]},
-                    {"t":"Nayır","r":["3","4"]}
+                    {"t":"Evet","r":[0,2]},
+                    {"t":"Hayır","r":[3,4]}
                 ]
         },
         {
-            "id":"3",
+            "id":3,
             "q":"Gizliliğine çok önem verir misin?",
             "a":[
-                    {"t":"Nevet","to":"4"},
-                    {"t":"Nayır","r":["7"]}
+                    {"t":"Evet","to":4},
+                    {"t":"Hayır","r":[7]}
                 ]
         },
         {
-            "id":"4",
+            "id":4,
             "q":"Oyun odaklı bir sistemi tercih eder misin?",
             "a":[
-                    {"t":"Nevet","r":["6"]},
-                    {"t":"Nayır","r":["8"]}
-                ]
-        },
-        {
-            "id":"5",
-            "q":"Her şey güzel olacak mı?",
-            "a":[
-                    {"t":"Her şey güzel olacak","r":["9"]},
-                    {"t":"Hayır olmayacak","r":["10","12"]},
-                    {"t":"Her şey daha daha güzel olacak","r":["11","13"]}
+                    {"t":"Evet","r":[6]},
+                    {"t":"Hayır","r":[8]}
                 ]
         }
     ],
-    "results":[
-        {"id":"0","s":"Solus"},
-        {"id":"1","s":"Mint"},
-        {"id":"2","s":"Manjaro"},
-        {"id":"3","s":"Arch"},
-        {"id":"4","s":"Gentoo"},
-        {"id":"5","s":"Fedora"},
-        {"id":"6","s":"Windows 7"},
-        {"id":"7","s":"Windows 10"},
-        {"id":"8","s":"macOS"},
-        {"id":"9","s":"CEHAPELLA"},
-        {"id":"10","s":"MEHAPOLO"},
-        {"id":"11","s":"AKUPUNTO"},
-        {"id":"12","s":"ÇAKAL"},
-        {"id":"13","s":"KLİMALI CÜPPE"}
+    "results":
+    [
+        {
+            "id":0,
+            "s":"Solus",
+            "h":"https://getsol.us/",
+            "rd":"2016",
+            "o":"İrlanda",
+            "d":"Sıfırdan geliştirilmiş bir Linux dağıtımıdır. Kendi geliştirdikleri Budgie masaüstü ortamını kullanır."
+        },
+        {
+            "id":1,
+            "s":"Mint",
+            "h":"https://linuxmint.com/",
+            "rd":"2006",
+            "o":"İrlanda",
+            "d":"Ubuntu tabanlı bir Linux dağıtımıdır. Varsayılan haliyle klasik bir masaüstü deneyimini hedefler."
+        },
+        {
+            "id":2,
+            "s":"Manjaro",
+            "h":"https://manjaro.org/",
+            "rd":"2013",
+            "o":"Avusturya, Almanya, Fransa",
+            "d":"Arch tabanlı bir Linux dağıtımıdır. Kullanıcı dostu ve hızlıdır."
+        },
+        {
+            "id":3,
+            "s":"Arch",
+            "h":"https://archlinux.org/",
+            "rd":"2002",
+            "o":"Kanada",
+            "d":"Bağımsız geliştirilmiştir. Yetkin Linux kullanıcılarını hedefler. Varsayılan kurulum sadece temel bileşenleri barındırır."
+        },
+        {
+            "id":4,
+            "s":"Gentoo",
+            "h":"https://gentoo.org/",
+            "rd":"2002",
+            "o":"ABD",
+            "d":"Bağımsız geliştirilmiştir. Hızlı ve çok yönlüdür. Geliştiricileri ve ağ uzmanlarını hedefler."
+        },
+        {
+            "id":5,
+            "s":"Fedora",
+            "h":"https://getfedora.org/",
+            "rd":"2003",
+            "o":"ABD",
+            "d":"Bağımsız geliştirilmiştir. Red Hat ve topluluk tarafından desteklenir."
+        },
+        {
+            "id":6,
+            "s":"Windows 7",
+            "h":"https://microsoft.com/software-download/windows7",
+            "rd":"2009",
+            "o":"ABD",
+            "d":"Microsoft tarafından kişisel bilgisayarlar için geliştirilmiştir. Geniş kullanım ihtiyaçlarını karşılar. Desteği kesilmiştir."
+        },
+        {
+            "id":7,
+            "s":"Windows 10",
+            "h":"https://microsoft.com/windows/",
+            "rd":"2014",
+            "o":"ABD",
+            "d":"Microsoft tarafından kişisel bilgisayarlar için geliştirilmiştir. Geniş kullanım ihtiyaçlarını karşılar."
+        },
+        {
+            "id":8,
+            "s":"macOS",
+            "h":"https://apple.com/macos/",
+            "rd":"2001",
+            "o":"ABD",
+            "d":"Apple tarafından Mac bilgisayarlar için geliştirilmiştir. Stabil olması, medya üretimi ve arayüzü ile öne çıkar."
+        }
     ]
 }

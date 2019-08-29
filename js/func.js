@@ -1,212 +1,236 @@
-var msg1 = "Batsın bu dünya...";
-
-document.querySelector("main").innerHTML = "<p style='color:slategray'><b>" + msg1 + "</b></p>";
-
-
-/*
-
-//// Taslak ////
-
-sorular{
-   s1 = Kimi seven?
-   c1 = Onu
-   c2 = Bunu
-   c3 = Şunu
-
-   s2 = Nabıyon beya?
-   c4 = İyi beya
-   c5 = Nolsun beya
-   c6 = Eyi sen nabıyon beya
-}
-sonuclar{
-   SA
-   WinSA
-   MacSA
-   SASA
-   ...
-   ...
+// Çerez yoksa oluştur
+if (!getCookie('language')) {
+   // Varsayılan dil
+   setCookie('tr');
 }
 
+// Çerezi oku
+const userlang = getCookie('language');
 
-Sayfa yüklendiğinde çalıştır > kontrol_fonksiyonu()
-
-Cevaba tıklandığında çalıştır > kontrol_fonksiyonu(cevabın id'si)
-
-kontrol_fonksiyonu(id) {
-
-      1. cevapSA { şimdikini soruyu sil, yönlendirdiği soruyu göster }
-      2. cevapSA {...}
-      3. cevapSA {sil, 2'ye dön}
-      4. cevapSA {...}
-      5. cevapSA {sil, 5'in sonucu göster (WinSA)}
-      6. cevapSA {...}
-      7. cevapSA {...}
-      8. cevapSA {sil, 8'in sonucu göster (MacSA)}
-      "  "  "
-      "  "  "
-      "  "  "
-
-      hiç biri değise { ilk soruyu sor (Başlangıç) }
+// Çerezi oluştur/değiştir, sayfayı yenile
+function setCookie(lang) {
+   document.cookie = `language = ${lang}`;
+   location.reload();
 }
 
-*/
-
-var userlang = "tr";
-
-// JSON dosyası son hâlinde değil, anahtar ve değer ağacı daha sonradan değiştirilebilir
-
-// Json dosyasını istiyoruz
-var request = new XMLHttpRequest();
-request.open("GET","js/lang/"+userlang+".json");
-request.responseType = 'json';
-request.send();
-
-// Sonucu alıyoruz ve ekrana göstermek için fonksiyona yolluyoruz
-request.onload = function() {
-   var jsonRespond = request.response;
-   createQuestions(jsonRespond);
- }
-
-function createQuestions(jsonObj){
-
-   // Kullanımı kolaylaştırmak için gerekli değişken tanımlamaları
-
-   /*
-   ###### question()
-   ###### Soruları veya questionLength değişkeni aracılığıyla soru sayısını döndürür
-   ######
-   ###### param0: soru[]
-   ######
-   */
-   let question = function() { 
-         // Parametre tanımlanmışsa ona ait soruyu döndür
-         if (arguments[0] !== undefined ) {
-               return jsonObj.questions[arguments[0]]
-         }
-         // Parametre tanımlanmamışsa tüm soruları döndür
-         else{
-               return jsonObj.questions;
-         }
-      };
-      
-   let questionLength = Object.keys(question()).length;
-   
-   /* 
-   ###### answer()
-   ###### Belirtilen sorunun tüm cevaplarını veya tek bir cevaba ait anahtarları döndürür
-   ######
-   ###### param0: soru
-   ###### param1: cevap
-   ######
-   */
-   let answer = function() {
-         // Parametre 1 tanımlanmışsa ona ait cevabın anahtarlarını döndür
-         if (arguments[1] !== undefined ) {
-            return arguments[0].a[arguments[1]]
-         }
-         // Parametre 1 tanımlanmamışsa tüm cevapları döndür
-         else{
-            return arguments[0].a
-         }
-      };
-   
-   /* 
-   ###### answerLength()
-   ###### Belirtilen sorunun cevap sayısını döndürür
-   ######
-   ###### param0: soru
-   ######
-   */
-   let answerLength = function() { return Object.keys(answer(question(arguments[0]))).length }
-   
-   // Soruların adetini hesaplayıp döngüyü adet kadar çalıştırıyoruz
-   // ### GEÇİCİ OLARAK DÖNGÜ İPTAL EDİLDİ. SADECE BELİRTİLEN TEK SORU ÇALIŞTIRILIYOR ###
-   questionCount = 1;
-   //for (let questionCount = 0; questionCount < questionLength; questionCount++) {
-      
-      // ### İleride newElement() fonksiyonu ile değiştirilecek ###
-      let elemQuestion = document.createElement("ul");
-      elemQuestion.setAttribute("data-question", questionCount);
-      elemQuestion.innerHTML = "<b style='color:red'>" + question(questionCount).id + "</b> " + question(questionCount).q + "<br> <i>" + answerLength(questionCount) + " tane seçenek bulundu</i><br><br>";  
-      document.querySelector("main").appendChild(elemQuestion);
-
-      // Soruya ait cevapların adetini hesaplayıp adet kadar çalıştırıyoruz
-      for (let answerCount = 0; answerCount < answerLength(questionCount) ; answerCount++) {
-         
-         // ### İleride newElement() fonksiyonu ile değiştirilecek ###
-         var elemAnswer = document.createElement("li");
-         elemAnswer.setAttribute("data-answer", answerCount);
-         elemAnswer.innerHTML = "<b style='color:green'>" + answerCount + "</b> " + answer(question(questionCount),answerCount).t  + questionOrResult(answer(question(questionCount),answerCount));   
-         document.querySelector("ul:last-child").appendChild(elemAnswer);
+// Çerezi getir
+function getCookie(cname) {
+   const name = `${cname}=`;
+   const decodedCookie = decodeURIComponent(document.cookie);
+   const ca = decodedCookie.split(';');
+   for (let i = 0; i < ca.length; i++) {
+      const c = ca[i];
+      while (c.charAt(0) == ' ') {
+         c = c.substring(1);
       }
+      if (c.indexOf(name) == 0) {
+         return c.substring(name.length, c.length);
+      }
+   }
+   return '';
+}
 
-      // Bu fonksiyon ile seçilen cevap başka soruya mı, yoksa direkt bir sonuca mı götürüyor onu kontrol ediyoruz ve ona uygun gösterimleri sağlıyoruz
-      function questionOrResult() {
-         let where;
-         if ( arguments[0].hasOwnProperty("to") ) {
-            elemAnswer.setAttribute("data-go", arguments[0].to);
-            where = " (<b>" + arguments[0].to + "</b> numaraya git)" ;
-         }
-         else {
-            where = ""; // Boş string yerine undefined vermiştim ama += ile kullanırken return yaptırınca cevaplardan önce "undefined" olarak onu da yazdırıyor
-            //console.log(where);
-            //console.log(arguments[0].r.length)
-            // Sonuçlarda kaç tane değer varsa hesaplanıp adet kadar çalıştırıyoruz
-            var resultGo = "";
-            for (let resultCount = 0; resultCount < arguments[0].r.length; resultCount++) {
+const initializeUI = () => {   
+   // Json dosyasını istiyoruz
+   const request = new XMLHttpRequest();
+   request.responseType = 'json';
+   request.open('GET',`js/lang/${userlang}.json`);
+   request.send();
+   
+   // Sonucu alıyoruz ve ekrana göstermek için fonksiyona yolluyoruz
+   request.onload = () => {
+      const jsonRespond = request.response;
+      const uiLang = jsonRespond.interface;
+      const firstQuestion = 0;
+      let questionCount = 1;
+      
+      document.title = uiLang.title;
+      document.querySelector('.pri-header h1').textContent = uiLang.title;
+      document.querySelector('.pri-header h2').textContent = uiLang.subtitle;
+      document.querySelector('.pri-header p').textContent = uiLang.description;
+      document.querySelector('.pri-footer p').textContent = `${uiLang.devs}`;
+      
+      // Uygulama başlangıç ekranı
+      newElement({eType : 'section', ePos : '.pri-content', eAttr : [['class', 'app-welcome fadeIn']]});
+      newElement({eType : 'p', ePos : '.app-welcome', eAttr : [['class', '.app-desciption']], eCont : uiLang.appdescription});
+      newElement({eType : 'button', ePos : '.app-welcome', eCont : uiLang.appstart});
+      document.querySelector('.app-welcome').addEventListener('click', function() {
+         this.remove();
+         createQuestions(jsonRespond, firstQuestion);
+      });
+      
+      // Dil değiştirici
+      newElement({eType : 'label', ePos : '.pri-footer', eAttr : [['for', 'language-changer']], eCont : uiLang.lang});
+      const elemLang = newElement({eType : 'select', ePos : '.pri-footer', eAttr : [['id', 'language-changer']]});
+      elemLang.innerHTML = `
+         <option value='${getCookie('language')}'>(${uiLang.activelang})</option>
+         <option value='tr'>Türkçe</option>
+         <option value='en'>English</option>
+         <option value='demo'>Lorem</option>
+      `;
 
-               resultGo += arguments[0].r[resultCount] + " ";
-               where += " (<b>Sonuç: " + arguments[0].r[resultCount] + " <span style='color:dodgerblue'>" + jsonObj.results[arguments[0].r[resultCount]].s + "</span></b>)";
-               
-               //console.log(arguments[0].r[resultCount]);
+      document.querySelector('#language-changer').addEventListener('change', function() {
+         setCookie(this.value);
+      })
+      
+      // Soru oluştur
+      function createQuestions(jsonObj, qID) {
+         
+         /**
+          * question()
+          * Soruları veya questionLength değişkeni aracılığıyla soru sayısını döndürür
+          * param0: soru
+          */
+         const question = searchID => {
+            if(searchID !== undefined) {
+               return jsonObj.questions.find(question => question.id === searchID);
             }
-            elemAnswer.setAttribute("data-go", resultGo.split(" ",arguments[0].r.length));
-            //console.log(elemAnswer.getAttribute("data-go"));
+            return jsonObj.questions;
          }
-         return where;
-      }
-      
-   //}
-
-   var capturebutton = document.querySelectorAll("[data-answer]");
-
-   for (let i = 0; i < capturebutton.length; i++) {
-
-      capturebutton[i].addEventListener("click", function() {
-         console.log("Say hello to my little friend: " + capturebutton[i].getAttribute("data-go") )
-         }  
-      );
-   }
-   
-}
-
-
-/* 
-###### newElement() ###### UYARI: BU FONKSİYON HENÜZ TAMAMLANMADI
-###### Verilen özelliklerde element oluşturur
-######
-###### param0: Element tipi
-###### param1: Elemente eklenecek HTML öğeleri
-###### param2: Yeni element hangi elementin içinde oluşturulacak?
-###### param3: Element özelliği
-###### param4: Özelliğin değeri
-######
-*/
-function newElement() {
-   if (arguments[0] && arguments[1] !== undefined) {
-      let newElem = document.createElement(arguments[0]);
-
-      if (arguments[3] && arguments[4] !== undefined) {
-         newElem.setAttribute(arguments[3],arguments[4]);
-      } 
-      else {
          
+         const questionLength = Object.keys( question() ).length;
+
+         /**
+          * answer()
+          * Belirtilen sorunun tüm cevaplarını veya tek bir cevaba ait anahtarları döndürür
+          * param0: soru
+          * param1: cevap
+          */
+         const answer = (question, answerID) => {
+            if (answerID !== undefined) {
+               return question.a[answerID];
+            }
+            return question.a;
+         }
+
+         /**
+          * answerLength()
+          * Belirtilen sorunun cevap sayısını döndürür
+          * param0: soru
+          */
+         const answerLength = a => {
+           return Object.keys(answer(question(a))).length;
+         };
+         
+         const elemQuestion = newElement({eType : 'article', ePos : '.pri-content', eAttr : [['data-question', qID]]});
+         elemQuestion.innerHTML = `
+            <header>
+               <span># ${questionCount}</span><p>${question(qID).q}</p>
+            </header> 
+            
+         `;
+         elemQuestion.className = 'slideIn';
+
+         document.querySelector('[data-question]').addEventListener('animationend', function() {
+            this.className = '';
+         });
+         
+         // Soruya ait cevapların adetini hesaplar ve elementleri oluşturur
+         let elemAnswer;
+         for (let answerCount = 0; answerCount < answerLength(qID) ; answerCount++) {
+            elemAnswer = newElement({eType : 'button', ePos : '[data-question]', eAttr : [['data-answer', answerCount]], eCont: answer(question(qID),answerCount).t});
+            questionOrResult(answer(question(qID),answerCount));
+         }
+         
+         // Seçeneği başka bir soru veya sonuç olarak ayarlar
+         function questionOrResult(answer) {
+            if (answer.hasOwnProperty('to')) {
+               elemAnswer.setAttribute('data-go', answer.to);
+            } else if (answer.hasOwnProperty('r')) {
+               let dataStop = '';
+               for (let resultCount = 0; resultCount < answer.r.length; resultCount++) {
+                  dataStop += answer.r[resultCount] + ' ';
+               }
+               elemAnswer.setAttribute('data-stop', dataStop.split(' ', answer.r.length));
+            } else {
+               console.log('Hatalı dosya yapılandırması.');
+            }
+         }
+
+         // Seçeneklere tıklama olayını yakalar
+         const answerbutton = document.querySelectorAll('[data-answer]');
+         for (let i = 0; i < answerbutton.length; i++) {
+            answerbutton[i].addEventListener('click', function() {
+               // Animasyonlar tamamlanmadan elemente peşpeşe tıklandığında gereğinden fazla soru oluşturmaması için gereken kontrol.
+               // Geçici çözüm, daha iyi bir kontrol ile değiştirilebilir.
+               if (document.querySelector('[data-question]').getAttribute('class') === '') {
+                  const e = document.querySelector('[data-question]');
+                  e.className = 'slideOut';
+                  e.addEventListener('animationend', function() {
+                     e.remove(e[0]);
+                     if (answerbutton[i].hasAttribute('data-go')) {
+                        questionCount += 1;
+                        createQuestions(jsonRespond, Number(answerbutton[i].getAttribute('data-go')));
+                     } else if (answerbutton[i].hasAttribute('data-stop')) {
+                        questionCount += 1;
+                        createResults(answerbutton[i].getAttribute('data-stop'));
+                     } else {
+                        // Geçersiz veri varsa aynı soruyu döndür.
+                        createQuestions(jsonRespond, Number(e.getAttribute('data-question')));
+                        console.log('Geçerli bir seçenek değil!');
+                     }
+                  })
+               } else { 
+                  console.log('Animasyon bitmedi!');
+               }
+            });
+         }
+
+         // Sonuçları getirir
+         function createResults(answerAttr) {
+            const searchID = answerAttr.split(',');
+            const elemResultContainer = newElement({eType : 'section', ePos : '.pri-content', eAttr : [['id', 'suggestions'], ['class', 'app-final slideIn']], eCont : uiLang.appresults});
+            for (let i = 0; i < searchID.length; i++) {
+               let results = jsonObj.results.find(result => {
+                  return result.id === Number(searchID[i]);
+               });
+               const elemResult = newElement({eType : 'article', ePos : '#suggestions', eAttr : [['data-result', searchID[i]]]});
+               elemResult.innerHTML = `
+               <header>
+                  <h3>
+                     <a href='${results.h ? results.h : results.h = '#'}' target='_blank'>${results.s}</a>
+                  </h3>
+                  </header>
+               <p>${results.rd ? results.rd + ' - ' : results.rd = ''}${results.o ? results.o : results.o = uiLang.appErrorOrigin}</p>
+               <p>${results.d ? results.d : results.o = uiLang.appErrorDescription}</p>
+               `;
+            }
+
+            // Başa dön
+            const elemReset = newElement({eType : 'button', ePos : '#suggestions', eAttr : [['id','reset']], eCont : uiLang.apprestart});
+            document.querySelector('#reset').addEventListener('click', function() {
+               document.querySelector('main').innerHTML = '';
+               questionCount = 1;
+               createQuestions(jsonRespond, firstQuestion);
+            });
+         }
+
+      } // createQuestions()
+   } // request.onload
+
+   /**
+    * newElement()
+    * Verilen özelliklerde element oluşturur
+    * param0: Element tipi
+    * param1: Yeni element nerede oluşturulacak?
+    * param2: Elementin içeriği
+    * param3: Element özelliği ve değeri
+    **/
+   function newElement({eType, ePos, eCont, eAttr}) {
+      if (eType && ePos !== undefined) {
+         const newElem = document.createElement(eType);
+         if (eCont !== undefined) {
+            newElem.textContent = eCont;
+         }
+         if (eAttr !== undefined) {
+            eAttr.forEach(item => {
+               newElem.setAttribute(item[0], item[1]);
+            });
+         }
+         return document.querySelector(ePos).appendChild(newElem);
+      } else {
+         console.log('Element oluşturulamadı! Eksik parametre.');
       }
-      newElem.innerHTML = arguments[1];
-      document.querySelector(arguments[2]).appendChild(newElem);
    }
-   else {
-      console.log("Element oluşturulamadı!");
-   }
-   
-}
+} // initializeUI()
+initializeUI();
