@@ -51,13 +51,25 @@ const initializeUI = () => {
       document.querySelector('#developers').textContent = `${uiLang.devs}`;
       
       // Uygulama başlangıç ekranı
-      const elemStart = newElement({eType : 'section', ePos : '.pri-content', eAttr : [['class', 'app-welcome fadeIn']]});
-      newElement({eType : 'p', ePos : '.app-welcome', eAttr : [['class', '.app-desciption']], eCont : uiLang.appdescription});
-      newElement({eType : 'button', ePos : '.app-welcome', eAttr : [['class', 'button-style1']], eCont : uiLang.appstart});
-      document.querySelector('.button-style1').addEventListener('click', function() {
-         elemStart.remove();
-         createQuestions(jsonRespond, firstQuestion);
-      });
+      const welcome = () => {
+         const elemStart = newElement({eType : 'section', ePos : '.pri-content', eAttr : [['class', 'app-welcome fadeIn']]});
+         newElement({eType : 'p', ePos : '.app-welcome', eAttr : [['class', '.app-desciption']], eCont : uiLang.appdescription});
+         newElement({eType : 'button', ePos : '.app-welcome', eAttr : [['class', 'button-style1']], eCont : uiLang.appstart});
+         
+         // Başlat
+         document.querySelector('.button-style1').addEventListener('click', function() {
+            if (!elemStart.classList.contains('fadeOut')) {
+               elemStart.classList.add('fadeOut');
+               elemStart.addEventListener('animationend', () => {
+                  elemStart.remove();
+                  createQuestions(jsonRespond, firstQuestion);
+               })
+            } else {
+               console.log('Animasyon bitmedi!');
+            }
+         });
+      }
+      welcome();
       
       // Dil değiştirici
       newElement({eType : 'label', ePos : '#locale', eAttr : [['for', 'language-changer']], eCont : uiLang.lang});
@@ -112,17 +124,16 @@ const initializeUI = () => {
            return Object.keys(answer(question(a))).length;
          };
          
-         const elemQuestion = newElement({eType : 'article', ePos : '.pri-content', eAttr : [['data-question', qID]]});
+         const elemQuestion = newElement({eType : 'article', ePos : '.pri-content', eAttr : [['data-question', qID], ['class', 'slideIn']]});
          elemQuestion.innerHTML = `
             <header>
                <span># ${questionCount}</span><p>${question(qID).q}</p>
             </header> 
             
          `;
-         elemQuestion.className = 'slideIn';
 
          document.querySelector('[data-question]').addEventListener('animationend', function() {
-            this.className = '';
+            this.classList.remove('slideIn');
          });
          
          // Soruya ait cevapların adetini hesaplar ve elementleri oluşturur
@@ -152,10 +163,9 @@ const initializeUI = () => {
          for (let i = 0; i < answerbutton.length; i++) {
             answerbutton[i].addEventListener('click', function() {
                // Animasyonlar tamamlanmadan elemente peşpeşe tıklandığında gereğinden fazla soru oluşturmaması için gereken kontrol.
-               // Geçici çözüm, daha iyi bir kontrol ile değiştirilebilir.
-               if (document.querySelector('[data-question]').getAttribute('class') === '') {
-                  const e = document.querySelector('[data-question]');
-                  e.className = 'slideOut';
+               const e = document.querySelector('[data-question]');
+               if (!e.classList.contains('slideOut')) {
+                  e.classList.add('slideOut');
                   e.addEventListener('animationend', function() {
                      e.remove(e[0]);
                      if (answerbutton[i].hasAttribute('data-go')) {
@@ -199,9 +209,16 @@ const initializeUI = () => {
             // Başa dön
             const elemReset = newElement({eType : 'button', ePos : '#suggestions', eAttr : [['id','reset'], ['class', 'button-style3']], eCont : uiLang.apprestart});
             document.querySelector('#reset').addEventListener('click', function() {
-               document.querySelector('main').innerHTML = '';
-               questionCount = 1;
-               createQuestions(jsonRespond, firstQuestion);
+               if (!elemResultContainer.classList.contains('fadeOut')) {
+                  elemResultContainer.classList.add('fadeOut');
+                  elemResultContainer.addEventListener('animationend', () => {
+                     document.querySelector('.pri-content').innerHTML = '';
+                     questionCount = 1;
+                     welcome();
+                  })
+               } else {
+                  console.log('Animasyon bitmedi!');
+               }
             });
          }
 
