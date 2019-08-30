@@ -132,8 +132,17 @@ const initializeUI = () => {
             <footer></footer>
          `;
 
+         // Cevap sayısına göre yerleşime karar ver
+         const elemQuestionFooter = document.querySelector('[data-question] footer');
+         if (answerLength(qID) <= 2) {
+            elemQuestionFooter.classList.add('layout-row');
+         } else {
+            elemQuestionFooter.classList.add('layout-col');
+         }
+
          elemQuestion.addEventListener('animationend', function() {
             this.classList.remove('slideIn');
+            elemQuestionFooter.classList.add('fadeIn');
          });
          
          // Soruya ait cevapların adetini hesaplar ve elementleri oluşturur
