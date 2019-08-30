@@ -277,6 +277,7 @@ button:focus, select:focus {
 /* MEDIA QUERIES */
 @media (max-width: 767px) {
   body {
+    grid-template-columns: auto;
     grid-template-areas: 
     'a'
     'b'
