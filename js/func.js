@@ -129,7 +129,7 @@ const initializeUI = () => {
             <header>
                <span># ${questionCount}</span><p>${question(qID).q}</p>
             </header> 
-            
+            <footer></footer>
          `;
 
          elemQuestion.addEventListener('animationend', function() {
@@ -139,7 +139,7 @@ const initializeUI = () => {
          // Soruya ait cevapların adetini hesaplar ve elementleri oluşturur
          let elemAnswer;
          for (let answerCount = 0; answerCount < answerLength(qID) ; answerCount++) {
-            elemAnswer = newElement({eType : 'button', ePos : '[data-question]', eAttr : [['data-answer', answerCount], ['class', 'button-style2']], eCont: answer(question(qID),answerCount).t});
+            elemAnswer = newElement({eType : 'button', ePos : '[data-question] footer', eAttr : [['data-answer', answerCount], ['class', 'button-style2']], eCont: answer(question(qID),answerCount).t});
             questionOrResult(answer(question(qID),answerCount));
          }
          
