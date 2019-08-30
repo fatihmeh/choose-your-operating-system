@@ -132,7 +132,7 @@ const initializeUI = () => {
             
          `;
 
-         document.querySelector('[data-question]').addEventListener('animationend', function() {
+         elemQuestion.addEventListener('animationend', function() {
             this.classList.remove('slideIn');
          });
          
@@ -163,11 +163,10 @@ const initializeUI = () => {
          for (let i = 0; i < answerbutton.length; i++) {
             answerbutton[i].addEventListener('click', function() {
                // Animasyonlar tamamlanmadan elemente peşpeşe tıklandığında gereğinden fazla soru oluşturmaması için gereken kontrol.
-               const e = document.querySelector('[data-question]');
-               if (!e.classList.contains('slideOut')) {
-                  e.classList.add('slideOut');
-                  e.addEventListener('animationend', function() {
-                     e.remove(e[0]);
+               if (!elemQuestion.classList.contains('slideOut')) {
+                  elemQuestion.classList.add('slideOut');
+                  elemQuestion.addEventListener('animationend', function() {
+                     elemQuestion.remove();
                      if (answerbutton[i].hasAttribute('data-go')) {
                         questionCount += 1;
                         createQuestions(jsonRespond, Number(answerbutton[i].getAttribute('data-go')));
@@ -208,7 +207,7 @@ const initializeUI = () => {
 
             // Başa dön
             const elemReset = newElement({eType : 'button', ePos : '#suggestions', eAttr : [['id','reset'], ['class', 'button-style3']], eCont : uiLang.apprestart});
-            document.querySelector('#reset').addEventListener('click', function() {
+            elemReset.addEventListener('click', function() {
                if (!elemResultContainer.classList.contains('fadeOut')) {
                   elemResultContainer.classList.add('fadeOut');
                   elemResultContainer.addEventListener('animationend', () => {
