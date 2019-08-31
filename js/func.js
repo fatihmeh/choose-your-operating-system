@@ -62,6 +62,7 @@ const initializeUI = () => {
                elemStart.classList.add('fadeOut');
                elemStart.addEventListener('animationend', () => {
                   elemStart.remove();
+                  document.querySelector('.pri-header').classList.add('header-busy');
                   createQuestions(jsonRespond, firstQuestion);
                })
             } else {
@@ -180,6 +181,8 @@ const initializeUI = () => {
                         questionCount += 1;
                         createQuestions(jsonRespond, Number(answerbutton[i].getAttribute('data-go')));
                      } else if (answerbutton[i].hasAttribute('data-stop')) {
+                        document.querySelector('.pri-header').classList.remove('header-busy');
+                        document.querySelector('.pri-header').classList.add('header-final');
                         questionCount += 1;
                         createResults(answerbutton[i].getAttribute('data-stop'));
                      } else {
@@ -220,6 +223,7 @@ const initializeUI = () => {
                if (!elemResultContainer.classList.contains('fadeOut')) {
                   elemResultContainer.classList.add('fadeOut');
                   elemResultContainer.addEventListener('animationend', () => {
+                     document.querySelector('.pri-header').classList.remove('header-final');
                      document.querySelector('.pri-content').innerHTML = '';
                      questionCount = 1;
                      welcome();
