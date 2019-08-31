@@ -202,6 +202,9 @@ const initializeUI = () => {
          function createResults(answerAttr) {
             const searchID = answerAttr.split(',');
             const elemResultContainer = newElement({eType : 'section', ePos : '.pri-content', eAttr : [['id', 'suggestions'], ['class', 'app-final slideIn']], eCont : uiLang.appresults});
+            elemResultContainer.innerHTML = `
+               <p class='blink'>${uiLang.appresults}</p>
+            `
             for (let i = 0; i < searchID.length; i++) {
                let results = jsonObj.results.find(result => {
                   return result.id === Number(searchID[i]);
@@ -210,9 +213,9 @@ const initializeUI = () => {
                elemResult.innerHTML = `
                <header>
                   <h3>
-                     <a href='${results.h ? results.h : results.h = '#'}' target='_blank'>${results.s}</a>
+                     <a href='${results.h ? results.h : results.h = '#'}' target='_blank' class='result-links'>${results.s} &#128279</a>
                   </h3>
-                  </header>
+               </header>
                <p>${results.rd ? results.rd + ' - ' : results.rd = ''}${results.o ? results.o : results.o = uiLang.appErrorOrigin}</p>
                <p>${results.d ? results.d : results.o = uiLang.appErrorDescription}</p>
                `;

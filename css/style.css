@@ -11,19 +11,19 @@
 /* BASIC */
 :root {
   --body: #fff;
-  --header: #00d581;
-  --header2: #ca0054;
-  --header3: #0084ff;
-  --header-gradient: linear-gradient(0deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.2) 40%, rgba(0,0,0,0) 100%);
-  --textwhite: #fff;
-  --textblack: #000;
-  --textgray: #ababab;
-  --textgray2: #888;
-  --button1: #00d581;
-  --button2: #ebebeb;
-  --button3: #db0054;
-  --select: #1c67d6;
-  --select-active: #eee;
+  --green: #00d581;
+  --red: #db0054;
+  --blue: #0084ff;
+  --gradient: linear-gradient(0deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.2) 40%, rgba(0,0,0,0) 100%);
+  --black: #000;
+  --white: #fff;
+  --gray: #ebebeb;
+  --gray2: #ababab;
+  --gray3: #888;
+}
+
+a {
+  text-decoration: none;
 }
 
 html, body {
@@ -53,10 +53,10 @@ body {
   grid-area: a;
   padding: 0rem 1.2rem;
   position: relative;
-  background: var(--header);
+  background: var(--green);
   font-family: 'Montserrat', Arial, Helvetica, sans-serif;
   text-align: center;
-  color: var(--textwhite);
+  color: var(--white);
   transition: background 0.4s;
 }
 
@@ -67,7 +67,7 @@ body {
   top: 0;
   left: 0;
   z-index: 0;
-  background: var(--header-gradient);
+  background: var(--gradient);
 }
 
 .header-content {
@@ -76,11 +76,11 @@ body {
 }
 
 .header-busy {
-  background: var(--header2) !important;
+  background: var(--red) !important;
 }
 
 .header-final {
-  background: var(--header3) !important;
+  background: var(--blue) !important;
 }
 
 .pri-header hgroup {
@@ -118,12 +118,12 @@ body {
   display: flex;
   flex-direction: column;
   margin-bottom: 1.2rem;
-  border-bottom: 0.2rem solid var(--button2);
+  border-bottom: 0.2rem solid var(--gray);
   font-size: 1.8rem;
 }
 
 .question-info {
-  color: var(--textgray);
+  color: var(--gray2);
   font-weight: bold;
   font-size: 3rem;
 }
@@ -150,7 +150,7 @@ body {
   flex-direction: row;
   align-items: baseline;
   padding: 0.8rem 1.2rem;
-  color: var(--textgray);
+  color: var(--gray2);
   font-size: 1.4rem;
 }
 
@@ -175,14 +175,26 @@ body {
 }
 
 [data-result] {
-  width: 200px;
-  margin: 2px;
-  padding: 12px;
-  border: 1px solid rgb(0, 119, 255);
-  border-radius: 4px;
-  background: rgb(0, 140, 255);
+  margin: 1rem;
+  padding: 1.2rem;
   text-align: center;
-  color: white;
+  color: var(--gray3);
+}
+
+[data-result] header {
+  border-bottom: 0.2rem solid var(--blue);
+}
+
+.result-links {
+  transition: color 0.2s;
+}
+
+.result-links, .result-links:visited {
+  color: var(--blue);
+}
+
+.result-links:hover, .result-links:focus {
+  color: var(--green);
 }
 
 /* ANIMATINONS */
@@ -237,6 +249,19 @@ body {
   to {opacity: 1;}
 }
 
+.blink {
+  color: var(--green);
+  animation-name: blink;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+@keyframes blink {
+  from {opacity: 0}
+  to {opacity: 1;}
+}
+
 /* CONTROLS */
 button:focus, select:focus {
   outline: none;
@@ -249,7 +274,7 @@ button:focus, select:focus {
 
 .button-style1:active, .button-style2:active, .button-style3:active {
   top: 0.6rem;
-  /*box-shadow: 0 0 0.4rem var(--textgray);*/
+  /*box-shadow: 0 0 0.4rem var(--gray2);*/
 }
 
 .button-style1, .button-style2, .button-style3, .select-style {
@@ -263,58 +288,58 @@ button:focus, select:focus {
   min-width: 20rem;
   max-width: 30rem;
   padding: 1.6rem 2rem;
-  border: 0.1rem solid var(--button1);
+  border: 0.1rem solid var(--green);
   border-radius: 3rem;
-  color: var(--button1);
+  color: var(--green);
   font-size: 2rem;
 }
 
 .button-style1:hover, .button-style1:focus {
-  background: var(--button1);
-  color: var(--textwhite);
+  background: var(--green);
+  color: var(--white);
 }
 
 .button-style2 {
   flex: 1 1 0;
   margin: 0.6rem 1.2rem;
   padding: 1.8rem 2rem;
-  border: 0.1rem solid var(--button2);
+  border: 0.1rem solid var(--gray);
   border-radius: 0.4em;
-  color: var(--textgray);
+  color: var(--gray2);
 }
 
 .button-style2:hover, .button-style2:focus {
-  background: var(--button2);
-  color: var(--textgray2);
+  background: var(--gray);
+  color: var(--gray3);
 }
 
 .button-style3 {
   padding: 0.8rem 1.6rem;
-  border: 0.1rem solid var(--button3);
+  border: 0.1rem solid var(--red);
   border-radius: 3rem;
-  color: var(--button3);
+  color: var(--red);
   font-size: 1.4rem;
 }
 
 .button-style3:hover, .button-style3:focus {
-  background: var(--button3);
-  color: var(--textwhite);
+  background: var(--red);
+  color: var(--white);
 }
 
 .select-style {
   padding: 0.4rem 1.2rem;
   border: none;
   border-bottom: 0.2rem solid transparent;
-  color: var(--select);
+  color: var(--blue);
   -webkit-appearance: none;
 }
 
 .select-style:hover, .select-style:focus {
-  border-color: var(--select);
+  border-color: var(--blue);
 }
 
 .select-style:active {
-  background: var(--select-active);
+  background: var(--gray);
 }
 
 /* MEDIA QUERIES */
