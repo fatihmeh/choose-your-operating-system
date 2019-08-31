@@ -128,7 +128,8 @@ const initializeUI = () => {
          const elemQuestion = newElement({eType : 'article', ePos : '.pri-content', eAttr : [['data-question', qID], ['class', 'slideIn']]});
          elemQuestion.innerHTML = `
             <header>
-               <span># ${questionCount}</span><p>${question(qID).q}</p>
+               <div class='question-info'>#${questionCount}</div>
+               <p>${question(qID).q}</p>
             </header> 
             <footer></footer>
          `;
