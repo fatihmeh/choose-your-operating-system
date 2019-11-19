@@ -6,20 +6,20 @@
         "devs":"Developers:",
         "lang":"Language:",
         "activelang":"English",
-        "appdescription":"Answer the questions according to your preferences. Are you ready?",
+        "appdescription":"Answer the questions according to your preferences. Get ready.",
         "appstart":"Start",
-        "appmascot":"Your old friend is waiting for help to you!",
-        "appmascotAlt":"A old monitor of computer",
-        "appresults":"Congratulations, you're done!",
-        "apprestart":"Return to Start",
+        "appmascot":"Your old friend is waiting to help you!",
+        "appmascotAlt":"A crt monitor",
+        "appresults":"Congratulations, you're finished!",
+        "apprestart":"Go again",
         "appErrorOrigin":"Origin unknown",
-        "appErrorDescription":"Didn't found information"
+        "appErrorDescription":"Couldn't find any information"
     },
     "questions":
     [
         {
             "id":0,
-            "q":"Ücretsiz bir sistem mi istersin?",
+            "q":"Do you prefer a system without any fee?",
             "a":[
                     {"t":"Yes","to":1},
                     {"t":"No","to":3}
@@ -27,7 +27,7 @@
         },
         {
             "id":1,
-            "q":"Sık sık güncelleme ister misin?",
+            "q":"Do you require frequent updates for your software?",
             "a":[
                     {"t":"Yes","to":2},
                     {"t":"No","r":[1,5]}
@@ -35,7 +35,7 @@
         },
         {
             "id":2,
-            "q":"Sorun yaşarsan biraz uğraşmak seni sıkar mı?",
+            "q":"Do you mind tackling on problems?",
             "a":[
                     {"t":"Yes","r":[0,2]},
                     {"t":"No","r":[3,4]}
@@ -43,7 +43,7 @@
         },
         {
             "id":3,
-            "q":"Gizliliğine çok önem verir misin?",
+            "q":"Do you care for your privacy?",
             "a":[
                     {"t":"Yes","to":4},
                     {"t":"No","r":[7]}
@@ -51,7 +51,7 @@
         },
         {
             "id":4,
-            "q":"Oyun odaklı bir sistemi tercih eder misin?",
+            "q":"Do you prefer your operating system to be gaming oriented?",
             "a":[
                     {"t":"Yes","r":[6]},
                     {"t":"No","r":[8]}
@@ -65,72 +65,72 @@
             "s":"Solus",
             "h":"https://getsol.us/",
             "rd":"2016",
-            "o":"İrlanda",
-            "d":"Sıfırdan geliştirilmiş bir Linux dağıtımıdır. Kendi geliştirdikleri Budgie masaüstü ortamını kullanır."
+            "o":"Ireland",
+            "d":"A linux distro developed from scratch. Using their own desktop environment Budgie(other de's are available also)."
         },
         {
             "id":1,
             "s":"Mint",
             "h":"https://linuxmint.com/",
             "rd":"2006",
-            "o":"İrlanda",
-            "d":"Ubuntu tabanlı bir Linux dağıtımıdır. Varsayılan haliyle klasik bir masaüstü deneyimini hedefler."
+            "o":"Ireland",
+            "d":"Based on Ubuntu. Presents a familiar desktop in its default."
         },
         {
             "id":2,
             "s":"Manjaro",
             "h":"https://manjaro.org/",
             "rd":"2013",
-            "o":"Avusturya, Almanya, Fransa",
-            "d":"Arch tabanlı bir Linux dağıtımıdır. Kullanıcı dostu ve hızlıdır."
+            "o":"Austria, Germany, France",
+            "d":"Based on Arch. User friendly and fast."
         },
         {
             "id":3,
             "s":"Arch",
             "h":"https://archlinux.org/",
             "rd":"2002",
-            "o":"Kanada",
-            "d":"Bağımsız geliştirilmiştir. Yetkin Linux kullanıcılarını hedefler. Varsayılan kurulum sadece temel bileşenleri barındırır."
+            "o":"Canada",
+            "d":"Developed independent. Targets veteran Linux users. Initial setup only includes basic components."
         },
         {
             "id":4,
             "s":"Gentoo",
             "h":"https://gentoo.org/",
             "rd":"2002",
-            "o":"ABD",
-            "d":"Bağımsız geliştirilmiştir. Hızlı ve çok yönlüdür. Geliştiricileri ve ağ uzmanlarını hedefler."
+            "o":"USA",
+            "d":"Developed independent. Fast and variant. Targets developers and network specialists."
         },
         {
             "id":5,
             "s":"Fedora",
             "h":"https://getfedora.org/",
             "rd":"2003",
-            "o":"ABD",
-            "d":"Bağımsız geliştirilmiştir. Red Hat ve topluluk tarafından desteklenir."
+            "o":"USA",
+            "d":"Developed independent. Supported by Red Hat and community."
         },
         {
             "id":6,
             "s":"Windows 7",
             "h":"https://microsoft.com/software-download/windows7",
             "rd":"2009",
-            "o":"ABD",
-            "d":"Microsoft tarafından kişisel bilgisayarlar için geliştirilmiştir. Geniş kullanım ihtiyaçlarını karşılar. Desteği kesilmiştir."
+            "o":"USA",
+            "d":"Mostly selected by home users, developed by Microsoft. Suitable for all kind of demands. Not supported anymore because of newer version Windows 10."
         },
         {
             "id":7,
             "s":"Windows 10",
             "h":"https://microsoft.com/windows/",
             "rd":"2014",
-            "o":"ABD",
-            "d":"Microsoft tarafından kişisel bilgisayarlar için geliştirilmiştir. Geniş kullanım ihtiyaçlarını karşılar."
+            "o":"USA",
+            "d":"Mostly selected by home users and gamers. Suitable for all kind of demands."
         },
         {
             "id":8,
             "s":"macOS",
             "h":"https://apple.com/macos/",
             "rd":"2001",
-            "o":"ABD",
-            "d":"Apple tarafından Mac bilgisayarlar için geliştirilmiştir. Stabil olması, medya üretimi ve arayüzü ile öne çıkar."
+            "o":"USA",
+            "d":"Delevoped by Apple for their own computers: Mac. Stands for being stable, fluent interface and media content."
         }
     ]
 }
