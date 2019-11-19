@@ -8,6 +8,7 @@ if (!getCookie('language')) {
 const userlang = getCookie('language');
 
 // Çerezi oluştur/değiştir, sayfayı yenile
+// Çerezi şimdilik tarayıcı kapanana kadar hatırlıyor. Tarih mekanizması eklenmedi.
 function setCookie(lang) {
    document.cookie = `language = ${lang}`;
    location.reload();
@@ -44,16 +45,22 @@ const initializeUI = () => {
       const firstQuestion = 0;
       let questionCount = 1;
       
+      // Temel yazıları ekle
+      document.title = uiLang.title;
       document.querySelector('.pri-header h1').textContent = uiLang.title;
       document.querySelector('.pri-header h2').textContent = uiLang.subtitle;
       document.querySelector('.pri-header p').textContent = uiLang.description;
-      document.querySelector('#version').textContent = `beta2019-6390e81`;
-      document.querySelector('#developers').textContent = `${uiLang.devs}`;
+      // Görünen versiyon formatı: Ana sürüm . Yan sürüm . Düzeltme
+      document.querySelector('#version').textContent = `beta-1.0.0`;
+      // Geliştirici listesi
+      const developers = ['fatihmeh','obdegirmenci'];
+      document.querySelector('#developers').textContent = `${uiLang.devs} ${developers.join(', ')}`;
       
       // Uygulama başlangıç ekranı
       const welcome = () => {
          const elemStart = newElement({eType : 'section', ePos : '.pri-content', eAttr : [['class', 'app-welcome fadeIn']]});
          newElement({eType : 'p', ePos : '.app-welcome', eAttr : [['class', '.app-desciption']], eCont : uiLang.appdescription});
+         newElement({eType : 'img', ePos : '.app-welcome', eAttr : [['class', 'app-mascot'], ['src', 'assets/android-chrome-512x512.png'], ['title', uiLang.appmascot], ['alt', uiLang.appmascotAlt]]});
          newElement({eType : 'button', ePos : '.app-welcome', eAttr : [['class', 'button-style1']], eCont : uiLang.appstart});
          
          // Başlat

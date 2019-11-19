@@ -8,6 +8,8 @@
         "activelang":"English",
         "appdescription":"Answer the questions according to your preferences. Are you ready?",
         "appstart":"Start",
+        "appmascot":"Your old friend is waiting for help to you!",
+        "appmascotAlt":"A old monitor of computer",
         "appresults":"Congratulations, you're done!",
         "apprestart":"Return to Start",
         "appErrorOrigin":"Origin unknown",
