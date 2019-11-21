@@ -1,4 +1,5 @@
 /* 
+  - FONTS
   - BASIC
   - HEADER
   - CONTENT
@@ -7,6 +8,44 @@
   - CONTROLS
   - MEDIA QUERIES
 */
+
+/* FONTS */
+
+/* montserrat-regular - latin-ext_latin */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Montserrat Regular'), local('Montserrat-Regular'),
+       url('../fonts/montserrat-v14-latin-ext_latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+}
+
+/* montserrat-italic - latin-ext_latin */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: italic;
+  font-weight: 400;
+  src: local('Montserrat Italic'), local('Montserrat-Italic'),
+       url('../fonts/montserrat-v14-latin-ext_latin-italic.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+}
+
+/* roboto-regular - latin-ext_latin */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto-Regular'),
+       url('../fonts/roboto-v20-latin-ext_latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+}
+
+/* roboto-700 - latin-ext_latin */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Roboto Bold'), local('Roboto-Bold'),
+       url('../fonts/roboto-v20-latin-ext_latin-700.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+}
 
 /* BASIC */
 :root {
@@ -97,6 +136,7 @@ noscript {
 
 .pri-header h1 {
   font-size: 3rem;
+  font-weight: normal;
 }
 
 .pri-header h2 {
@@ -157,6 +197,29 @@ noscript {
   flex-direction: column;
 }
 
+[data-result] {
+  margin: 1rem;
+  padding: 1.2rem;
+  text-align: center;
+  color: var(--gray3);
+}
+
+[data-result] header {
+  border-bottom: 0.2rem solid var(--blue);
+}
+
+.result-links {
+  transition: color 0.2s;
+}
+
+.result-links, .result-links:visited {
+  color: var(--blue);
+}
+
+.result-links:hover, .result-links:focus {
+  color: var(--green);
+}
+
 /* FOOTER */
 .pri-footer {
   grid-area: c;
@@ -186,29 +249,6 @@ noscript {
 
 #locale label {
   margin-right: 0.8rem;
-}
-
-[data-result] {
-  margin: 1rem;
-  padding: 1.2rem;
-  text-align: center;
-  color: var(--gray3);
-}
-
-[data-result] header {
-  border-bottom: 0.2rem solid var(--blue);
-}
-
-.result-links {
-  transition: color 0.2s;
-}
-
-.result-links, .result-links:visited {
-  color: var(--blue);
-}
-
-.result-links:hover, .result-links:focus {
-  color: var(--green);
 }
 
 /* ANIMATINONS */
@@ -288,7 +328,6 @@ button:focus, select:focus {
 
 .button-style1:active, .button-style2:active, .button-style3:active {
   top: 0.6rem;
-  /*box-shadow: 0 0 0.4rem var(--gray2);*/
 }
 
 .button-style1, .button-style2, .button-style3, .select-style {

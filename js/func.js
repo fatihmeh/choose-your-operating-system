@@ -51,7 +51,7 @@ const initializeUI = () => {
       document.querySelector('.pri-header h2').textContent = uiLang.subtitle;
       document.querySelector('.pri-header p').textContent = uiLang.description;
       // Görünen versiyon formatı: Ana sürüm . Yan sürüm . Düzeltme
-      document.querySelector('#version').textContent = `beta-1.0.0`;
+      document.querySelector('#version').textContent = `beta-1.0.1`;
       // Geliştirici listesi
       const developers = ['fatihmeh','obdegirmenci'];
       document.querySelector('#developers').textContent = `${uiLang.devs} ${developers.join(', ')}`;
