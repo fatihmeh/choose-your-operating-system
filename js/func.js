@@ -51,7 +51,7 @@ const initializeUI = () => {
       document.querySelector('.pri-header h2').textContent = uiLang.subtitle;
       document.querySelector('.pri-header p').textContent = uiLang.description;
       // Görünen versiyon formatı: Ana sürüm . Yan sürüm . Düzeltme
-      document.querySelector('#version').textContent = `beta-1.0.0`;
+      document.querySelector('#version').textContent = `beta-1.0.1`;
       // Geliştirici listesi
       const developers = ['fatihmeh','obdegirmenci'];
       document.querySelector('#developers').textContent = `${uiLang.devs} ${developers.join(', ')}`;
@@ -59,8 +59,8 @@ const initializeUI = () => {
       // Uygulama başlangıç ekranı
       const welcome = () => {
          const elemStart = newElement({eType : 'section', ePos : '.pri-content', eAttr : [['class', 'app-welcome fadeIn']]});
-         newElement({eType : 'p', ePos : '.app-welcome', eAttr : [['class', '.app-desciption']], eCont : uiLang.appdescription});
-         newElement({eType : 'img', ePos : '.app-welcome', eAttr : [['class', 'app-mascot'], ['src', 'assets/android-chrome-512x512.png'], ['title', uiLang.appmascot], ['alt', uiLang.appmascotAlt]]});
+         newElement({eType : 'p', ePos : '.app-welcome', eAttr : [['class', 'app-description']], eCont : uiLang.appdescription});
+         newElement({eType : 'img', ePos : '.app-welcome', eAttr : [['class', 'app-mascot'], ['src', 'images/choose-your-os-mascot.png'], ['title', uiLang.appmascot], ['alt', uiLang.appmascotAlt]]});
          newElement({eType : 'button', ePos : '.app-welcome', eAttr : [['class', 'button-style1']], eCont : uiLang.appstart});
          
          // Başlat
