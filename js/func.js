@@ -59,8 +59,8 @@ const initializeUI = () => {
       // Uygulama başlangıç ekranı
       const welcome = () => {
          const elemStart = newElement({eType : 'section', ePos : '.pri-content', eAttr : [['class', 'app-welcome fadeIn']]});
-         newElement({eType : 'p', ePos : '.app-welcome', eAttr : [['class', '.app-desciption']], eCont : uiLang.appdescription});
-         newElement({eType : 'img', ePos : '.app-welcome', eAttr : [['class', 'app-mascot'], ['src', 'assets/android-chrome-512x512.png'], ['title', uiLang.appmascot], ['alt', uiLang.appmascotAlt]]});
+         newElement({eType : 'p', ePos : '.app-welcome', eAttr : [['class', 'app-description']], eCont : uiLang.appdescription});
+         newElement({eType : 'img', ePos : '.app-welcome', eAttr : [['class', 'app-mascot'], ['src', 'images/choose-your-os-mascot.png'], ['title', uiLang.appmascot], ['alt', uiLang.appmascotAlt]]});
          newElement({eType : 'button', ePos : '.app-welcome', eAttr : [['class', 'button-style1']], eCont : uiLang.appstart});
          
          // Başlat

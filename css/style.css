@@ -163,9 +163,8 @@ noscript {
 }
 
 .app-mascot {
-  max-width: 60%;
   display: block;
-  margin: auto;
+  margin: 0 auto 3.6rem auto;
 }
 
 [data-question] header {
@@ -411,6 +410,14 @@ button:focus, select:focus {
   
   .pri-footer section {
     text-align: center !important;
+  }
+
+  .app-description {
+    margin-top: 0;
+  }
+
+  .app-mascot {
+    max-width: 60%;
   }
 }
 
